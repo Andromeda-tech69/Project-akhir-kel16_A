@@ -1,7 +1,5 @@
-import os, time, pwinput
+import os, time, pwinput, json
 from prettytable import PrettyTable
-import json
-
 
 from Admin import crud as admin
 
@@ -102,6 +100,6 @@ def login():
                     break
 
 if __name__ == "__main__":
-    try: admin.create_data()
+    try: login()
     except Exception as e: print(e) 
     except KeyboardInterrupt: print("KeyBoard  Interrupt")
