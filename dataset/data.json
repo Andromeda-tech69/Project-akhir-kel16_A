@@ -4,73 +4,71 @@
       "nomor_kamar": 1,
       "jenis": "VVIP",
       "akses": "membership",
-      "spek_pc": ""
+      "spek_pc": "",
+      "status": "ready"
     },
     {
       "nomor_kamar": 2,
       "jenis": "VIP",
       "akses": "membership",
-      "spek_pc": ""
+      "spek_pc": "",
+      "status": "ready"
     },
     {
       "nomor_kamar": 3,
       "jenis": "Reguler",
       "akses": "umum",
-      "spek_pc": ""
+      "spek_pc": "",
+      "status": "ready"
     },
     {
       "nomor_kamar": 4,
       "jenis": "Reguler",
       "akses": "umum",
-      "spek_pc": ""
+      "spek_pc": "",
+      "status": "ready"
     },
     {
       "nomor_kamar": 5,
       "jenis": "Reguler",
       "akses": "umum",
-      "spek_pc": ""
+      "spek_pc": "",
+      "status": "ready"
     },
     {
       "nomor_kamar": 6,
       "jenis": "Reguler",
       "akses": "umum",
-      "spek_pc": ""
+      "spek_pc": "",
+      "status": "ready"
     },
     {
       "nomor_kamar": 7,
       "jenis": "Reguler",
       "akses": "umum",
-      "spek_pc": ""
+      "spek_pc": "",
+      "status": "ready"
     },
     {
       "nomor_kamar": 8,
       "jenis": "Reguler",
       "akses": "umum",
-      "spek_pc": ""
+      "spek_pc": "",
+      "status": "ready"
     },
     {
       "nomor_kamar": 9,
       "jenis": "Reguler",
       "akses": "umum",
-      "spek_pc": ""
+      "spek_pc": "",
+      "status": "booked"
     },
     {
       "nomor_kamar": 10,
-      "jenis": "1",
-      "akses": "1",
-      "spek_pc": "1"
-    },
-    {
-      "nomor_kamar": 11,
-      "jenis": "test",
-      "akses": "test",
-      "spek_pc": "test"
-    },
-    {
-      "nomor_kamar": 12,
-      "jenis": "v",
-      "akses": "v",
-      "spek_pc": "v"
+      "jenis": "a",
+      "akses": "a",
+      "spek_pc": "a",
+      "status": "ready"
     }
   ]
 }

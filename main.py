@@ -1,8 +1,6 @@
 import os, time, pwinput, json
 from prettytable import PrettyTable
 
-
-
 def clear():
     os.system('cls')
     time.sleep(1)
@@ -107,5 +105,5 @@ def main():
 
 if __name__ == "__main__":
     try: main()
-    except Exception as e: print(e) 
+    # except Exception as e: print(e) 
     except KeyboardInterrupt: print("KeyBoard  Interrupt")

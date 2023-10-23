@@ -49,6 +49,7 @@ def create_data(data):
         "jenis": input("Masukkan jenis kamar: "),
         "akses": input("Masukkan akses kamar: "),
         "spek_pc": input("Masukkan spesifikasi PC: "),
+        "status": "ready",
     }
 
     data["kamar_pc"].append(new_entry)
@@ -66,12 +67,16 @@ def update_data(data):
         except:print("Masukan Dengan Benar")
     for entry in data["kamar_pc"]:
         if entry["nomor_kamar"] == nomor_kamar:
-            entry["jenis"] = input("Masukkan jenis kamar baru: ")
-            entry["akses"] = input("Masukkan akses kamar baru: ")
-            entry["spek_pc"] = input("Masukkan spesifikasi PC baru: ")
-            save_data(data)
-            print("Data berhasil diubah.")
-            return
+            while True:
+                entry["jenis"] = input("Masukkan jenis kamar baru: ").lower()
+                entry["akses"] = input("Masukkan akses kamar baru: ").lower()
+                entry["spek_pc"] = input("Masukkan spesifikasi PC baru: ").lower()
+                entry["status"] = input("Masukkan status baru: ").lower()
+                if entry["status"] == "ready" or entry["status"] == "booked":
+                    save_data(data)
+                    print("Data berhasil diubah.")
+                    return False
+                else:print("status hanya 'ready' dan 'booked'")
     print("Nomor kamar tidak ditemukan.")
 
 # Fungsi untuk menghapus data
@@ -105,12 +110,16 @@ def menu():
         pilihan = input("Pilih menu: ")
 
         if pilihan == '1':
+            main.clear()
             create_data(data)
         elif pilihan == '2':
+            main.clear()
             read_data(data)
         elif pilihan == '3':
+            main.clear()
             update_data(data)
         elif pilihan == '4':
+            main.clear()
             delete_data(data)
         elif pilihan == '5':
             main.clear()
