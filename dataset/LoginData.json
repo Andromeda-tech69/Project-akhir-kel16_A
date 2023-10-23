@@ -1,0 +1,32 @@
+{
+    "admin": {
+        "username": "admin",
+        "email": "admin@gmail.com",
+        "password": "Admin3452"
+    },
+    "pelanggan": [
+        {
+            "username": "Andromeda",
+            "email": "Andromeda@gmail.com",
+            "password": "Andromeda2342",
+            "membership_id": "A03GJK6"
+        },
+        {
+            "username": "Hibnu",
+            "email": "HibnuAS@gmail.com",
+            "password": "Loc2341",
+            "membership_id": "A10GJK6"
+        },
+        {
+            "username": "fafa",
+            "email": "fafa@gmail.com",
+            "password": "fafa",
+            "membership_id": "A10GJK7"
+        },
+        {
+            "username": "a",
+            "email": "a",
+            "password": "a"
+        }
+    ]
+}
