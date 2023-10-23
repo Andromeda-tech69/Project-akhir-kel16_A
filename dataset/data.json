@@ -56,15 +56,21 @@
     },
     {
       "nomor_kamar": 10,
-      "jenis": "Reguler",
-      "akses": "umum",
-      "spek_pc": ""
+      "jenis": "1",
+      "akses": "1",
+      "spek_pc": "1"
     },
     {
       "nomor_kamar": 11,
       "jenis": "test",
       "akses": "test",
       "spek_pc": "test"
+    },
+    {
+      "nomor_kamar": 12,
+      "jenis": "v",
+      "akses": "v",
+      "spek_pc": "v"
     }
   ]
 }

@@ -1,9 +1,15 @@
 import json,os
 
+from prettytable import PrettyTable
+
+# Path Awal
 ROOT_DIR = os.path.abspath(os.curdir)
 
+import main
+
 # Fungsi untuk membaca data dari file JSON
-def load_data():
+
+def load():
     try:
         with open(f"{ROOT_DIR}/dataset/data.json", "r") as file:
             data = json.load(file)
@@ -18,6 +24,24 @@ def save_data(data):
             json.dump(data, file, indent=2)
     except FileNotFoundError: print("File Not Found")
         
+def read_data(data):
+    kamar_pc = data["kamar_pc"]
+
+    if not kamar_pc:
+        print("Tidak ada data 'kamar_pc' dalam file JSON.")
+        return
+
+    table = PrettyTable()
+    
+    # Mengambil nama kolom dari kunci (keys) JSON pertama
+    field_names = kamar_pc[0].keys()
+    table.field_names = field_names
+
+    for entry in kamar_pc:
+        table.add_row([entry.get(key, "") for key in field_names])
+
+    print(table)
+
 # Fungsi untuk menambahkan data baru
 def create_data(data):
     new_entry = {
@@ -31,20 +55,15 @@ def create_data(data):
     save_data(data)
     print("Data berhasil ditambahkan.")
 
-# Fungsi untuk membaca data
-def read_data(data):
-    kamar_pc = data["kamar_pc"]
-    for entry in kamar_pc:
-        print(f"Nomor Kamar: {entry['nomor_kamar']}")
-        print(f"Jenis: {entry['jenis']}")
-        print(f"Akses: {entry['akses']}")
-        print(f"Spesifikasi PC: {entry['spek_pc']}")
-        print()
 
 # Fungsi untuk mengubah data
 def update_data(data):
     read_data(data)
-    nomor_kamar = int(input("Masukkan nomor kamar yang ingin diubah: "))
+    while True:
+        try:
+            nomor_kamar = int(input("Masukkan nomor kamar yang ingin diubah: "))
+            break
+        except:print("Masukan Dengan Benar")
     for entry in data["kamar_pc"]:
         if entry["nomor_kamar"] == nomor_kamar:
             entry["jenis"] = input("Masukkan jenis kamar baru: ")
@@ -58,7 +77,11 @@ def update_data(data):
 # Fungsi untuk menghapus data
 def delete_data(data):
     read_data(data)
-    nomor_kamar = int(input("Masukkan nomor kamar yang ingin dihapus: "))
+    while True:
+        try:
+            nomor_kamar = int(input("Masukkan nomor kamar yang ingin dihapus: "))
+            break
+        except: print("Masukan Dengan Benar")
     for entry in data["kamar_pc"]:
         if entry["nomor_kamar"] == nomor_kamar:
             data["kamar_pc"].remove(entry)
@@ -67,28 +90,33 @@ def delete_data(data):
             return
     print("Nomor kamar tidak ditemukan.")
 
-# Program utama
-data = load_data()
+def menu():
+    # Program utama
+    data = load()
+    
+    while True:
+        print("Menu:")
+        print("1. Tambah Data")
+        print("2. Baca Data")
+        print("3. Ubah Data")
+        print("4. Hapus Data")
+        print("5. Keluar")
 
-while True:
-    print("Menu:")
-    print("1. Tambah Data")
-    print("2. Baca Data")
-    print("3. Ubah Data")
-    print("4. Hapus Data")
-    print("5. Keluar")
+        pilihan = input("Pilih menu: ")
 
-    choice = input("Pilih menu: ")
+        if pilihan == '1':
+            create_data(data)
+        elif pilihan == '2':
+            read_data(data)
+        elif pilihan == '3':
+            update_data(data)
+        elif pilihan == '4':
+            delete_data(data)
+        elif pilihan == '5':
+            main.clear()
+            main.main()
+            break
+        else:
+            print("Menu tidak valid. Silakan pilih menu yang benar.")
 
-    if choice == '1':
-        create_data(data)
-    elif choice == '2':
-        read_data(data)
-    elif choice == '3':
-        update_data(data)
-    elif choice == '4':
-        delete_data(data)
-    elif choice == '5':
-        break
-    else:
-        print("Menu tidak valid. Silakan pilih menu yang benar.")
+menu()

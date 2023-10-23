@@ -1,7 +1,7 @@
 import os, time, pwinput, json
 from prettytable import PrettyTable
 
-from Admin import crud as admin
+
 
 def clear():
     os.system('cls')
@@ -16,7 +16,8 @@ def load_data():
         print("File not found. Please check the file path.")
         raise SystemExit
 
-def login():
+def main():
+
     pengguna = load_data()
     
     while True:
@@ -34,10 +35,15 @@ def login():
 
             if (pengguna["admin"]["username"] == username_or_email or
                 pengguna["admin"]["email"] == username_or_email) and pengguna["admin"]["password"] == password:
+                
                 print("Login sukses.")
-                admin.create_data()
+                clear()
+                import Admin.crud as admin
+                admin.menu()
+                
                 break
             else:
+                clear()
                 print("Login gagal. Silakan coba lagi.")
 
         elif masukkan == "2":
@@ -100,6 +106,6 @@ def login():
                     break
 
 if __name__ == "__main__":
-    try: login()
+    try: main()
     except Exception as e: print(e) 
     except KeyboardInterrupt: print("KeyBoard  Interrupt")

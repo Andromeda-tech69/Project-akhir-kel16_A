@@ -1,8 +1,8 @@
 {
     "admin": {
-        "username": "admin",
+        "username": "1",
         "email": "admin@gmail.com",
-        "password": "Admin3452"
+        "password": "1"
     },
     "pelanggan": [
         {
