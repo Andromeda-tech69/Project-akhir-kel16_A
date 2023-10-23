@@ -1,9 +1,11 @@
-import json
+import json,os
+
+ROOT_DIR = os.path.abspath(os.curdir)
 
 # Fungsi untuk membaca data dari file
 def load_data():
     try:
-        with open("../dataset/data.json", "r") as file:
+        with open(f"{ROOT_DIR}/dataset/data.json", "r") as file:
             data = json.load(file)
     except FileNotFoundError:
         data = []
@@ -12,7 +14,7 @@ def load_data():
 # Fungsi untuk menyimpan data ke file
 def save_data(data):
     try:
-        with open("../dataset/data.json", "w") as file:
+        with open(f"{ROOT_DIR}/dataset/data.json", "w") as file:
             json.dump(data, file, indent=2)
     except FileNotFoundError:
         print("File not found. Please check the file path.")

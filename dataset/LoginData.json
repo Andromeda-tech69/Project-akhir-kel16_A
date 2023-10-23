@@ -25,8 +25,9 @@
         },
         {
             "username": "a",
-            "email": "a",
-            "password": "a"
+            "email": "a@gmail.com",
+            "password": "a",
+            "membership_id": "A10GJK1"
         }
     ]
 }
