@@ -65,12 +65,13 @@ def top_up_saldo():
     print("Saldo berhasil ditambahkan!")
 
 def daftar_membership():
-    membership = input("Pilih jenis membership (platinum/gold): ")
-
-    # Logika untuk mendaftarkan pelanggan sebagai member platinum atau gold
-    
-
-    print("Pendaftaran berhasil!")
+        if "membership_id" in pelanggan:
+            if user_data["membership_id"].startswith("A"):
+                print("Platinum Member - You have premium privileges.")
+            elif user_data["membership_id"].startswith("G"):
+                print("Gold Member - You have special privileges.")
+        else:
+            print("Regular Member - You have basic privileges.")
 
 # Fungsi utama untuk menjalankan menu
 def main_menu():
