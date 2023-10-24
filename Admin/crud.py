@@ -14,7 +14,7 @@ def load():
         with open(f"{ROOT_DIR}/dataset/data.json", "r") as file:
             data = json.load(file)
     except FileNotFoundError:
-        data = {"kamar_pc": []}
+        data = {"Daftar_paket": []}
     return data
 
 # Fungsi untuk menyimpan data ke file JSON
@@ -25,34 +25,34 @@ def save_data(data):
     except FileNotFoundError: print("File Not Found")
         
 def read_data(data):
-    kamar_pc = data["kamar_pc"]
+    Daftar_paket = data["Daftar_paket"]
 
-    if not kamar_pc:
-        print("Tidak ada data 'kamar_pc' dalam file JSON.")
+    if not Daftar_paket:
+        print("Tidak ada data 'Daftar_paket' dalam file JSON.")
         return
 
     table = PrettyTable()
     
     # Mengambil nama kolom dari kunci (keys) JSON pertama
-    field_names = kamar_pc[0].keys()
+    field_names = Daftar_paket[0].keys()
     table.field_names = field_names
 
-    for entry in kamar_pc:
+    for entry in Daftar_paket:
         table.add_row([entry.get(key, "") for key in field_names])
 
     print(table)
 
 # Fungsi untuk menambahkan data baru
 def create_data(data):
-    new_entry = {
-        "nomor_kamar": len(data["kamar_pc"]) + 1,
-        "jenis": input("Masukkan jenis kamar: "),
-        "akses": input("Masukkan akses kamar: "),
-        "spek_pc": input("Masukkan spesifikasi PC: "),
-        "status": "ready",
+    data_baru = {
+        "Deskripsi": len(data["Daftar_paket"]) + 1,
+        "jenis": input("Masukkan jenis: "),
+        "akses": input("Masukkan akses: "),
+        "Harga": input("Masukkan harga: "),
+        "Stock": input("Masukkan jumblah stok :"),
     }
 
-    data["kamar_pc"].append(new_entry)
+    data["Daftar_paket"].append(data_baru)
     save_data(data)
     print("Data berhasil ditambahkan.")
 
@@ -62,11 +62,11 @@ def update_data(data):
     read_data(data)
     while True:
         try:
-            nomor_kamar = int(input("Masukkan nomor kamar yang ingin diubah: "))
+            Daftar_paket = int(input("Masukkan nomor paket yang ingin diubah: "))
             break
         except:print("Masukan Dengan Benar")
-    for entry in data["kamar_pc"]:
-        if entry["nomor_kamar"] == nomor_kamar:
+    for entry in data["Daftar_paket"]:
+        if entry["nomor"] == nomor:
             while True:
                 entry["jenis"] = input("Masukkan jenis kamar baru: ").lower()
                 entry["akses"] = input("Masukkan akses kamar baru: ").lower()
@@ -84,16 +84,16 @@ def delete_data(data):
     read_data(data)
     while True:
         try:
-            nomor_kamar = int(input("Masukkan nomor kamar yang ingin dihapus: "))
+            nomor = int(input("Masukkan nomor paket yang ingin dihapus: "))
             break
         except: print("Masukan Dengan Benar")
-    for entry in data["kamar_pc"]:
-        if entry["nomor_kamar"] == nomor_kamar:
-            data["kamar_pc"].remove(entry)
+    for entry in data["Daftar_paket"]:
+        if entry["nomor"] == nomor:
+            data["Daftar_paket"].remove(entry)
             save_data(data)
-            print(f"Data nomor kamar {nomor_kamar} berhasil dihapus.")
+            print(f"Data nomor paket {nomor} berhasil dihapus.")
             return
-    print("Nomor kamar tidak ditemukan.")
+    print("Nomor paket tidak ditemukan.")
 
 def menu():
     # Program utama

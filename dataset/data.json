@@ -1,74 +1,84 @@
 {
-  "kamar_pc": [
+  "Daftar_paket": [
     {
-      "nomor_kamar": 1,
-      "jenis": "VVIP",
-      "akses": "membership",
-      "spek_pc": "",
-      "status": "ready"
+      "Nomor": 1,
+      "Deskripsi": "Paket Unlimited Spesial Platinum member",
+      "jenis": "Paket Bulanan",
+      "akses": "Plat_member",
+      "Harga": "Rp. 350.000",
+      "stock": "5"
     },
     {
-      "nomor_kamar": 2,
-      "jenis": "VIP",
-      "akses": "membership",
-      "spek_pc": "",
-      "status": "ready"
+      "Nomor": 2,
+      "Deskripsi": "Paket 250GB Spesial Platinum member",
+      "jenis": "Paket Bulanan",
+      "akses": "Plat_member",
+      "Harga": "Rp. 250.000",
+      "stock": "10"
     },
     {
-      "nomor_kamar": 3,
-      "jenis": "Reguler",
-      "akses": "umum",
-      "spek_pc": "",
-      "status": "ready"
+      "Nomor": 3,
+      "Deskripsi": "Paket WOW 75GB spesial Gold member",
+      "jenis": "Paket Bulanan",
+      "akses": "Gold_member",
+      "Harga": "Rp. 100.000",
+      "stock": "100"
     },
     {
-      "nomor_kamar": 4,
-      "jenis": "Reguler",
-      "akses": "umum",
-      "spek_pc": "",
-      "status": "ready"
+      "Nomor": 4,
+      "Deskripsi": "Paket Spesial 60GB Gold member",
+      "jenis": "Paket Bulanan",
+      "akses": "Plat_member",
+      "Harga": "Rp. 75.000",
+      "stock": "100"
     },
     {
-      "nomor_kamar": 5,
-      "jenis": "Reguler",
-      "akses": "umum",
-      "spek_pc": "",
-      "status": "ready"
+      "Nomor": 5,
+      "Deskripsi": "Paket Spesial 50GB Reguler",
+      "jenis": "Paket Bulanan",
+      "akses": "Reguler",
+      "Harga": "Rp. 100.000",
+      "stock": "Tidak terbatas"
     },
     {
-      "nomor_kamar": 6,
-      "jenis": "Reguler",
-      "akses": "umum",
-      "spek_pc": "",
-      "status": "ready"
+      "Nomor": 6,
+      "Deskripsi": "Paket DUAR 30GB Reguler",
+      "jenis": "Paket Bulanan",
+      "akses": "Reguler",
+      "Harga": "Rp. 50.000",
+      "stock": "Tidak terbatas"
     },
     {
-      "nomor_kamar": 7,
-      "jenis": "Reguler",
-      "akses": "umum",
-      "spek_pc": "",
-      "status": "ready"
+      "Nomor": 7,
+      "Deskripsi": "Paket Hemat 13GB",
+      "jenis": "Paket Bulanan",
+      "akses": "Reguler",
+      "Harga": "Rp. 35.000",
+      "stock": "Tidak terbatas"
     },
     {
-      "nomor_kamar": 8,
-      "jenis": "Reguler",
-      "akses": "umum",
-      "spek_pc": "",
-      "status": "ready"
+      "Nomor": 8,
+      "Deskripsi": "Paket 25GB",
+      "jenis": "Paket Mingguan",
+      "akses": "Reguler",
+      "Harga": "Rp. 45.000",
+      "stock": "Tidak terbatas"
     },
     {
-      "nomor_kamar": 9,
-      "jenis": "Reguler",
-      "akses": "umum",
-      "spek_pc": "",
-      "status": "booked"
+      "Nomor": 9,
+      "Deskripsi": "Paket 15GB",
+      "jenis": "Paket Mingguan",
+      "akses": "Reguler",
+      "Harga": "Rp. 30.000",
+      "stock": "Tidak terbatas"
     },
     {
-      "nomor_kamar": 10,
-      "jenis": "a",
-      "akses": "a",
-      "spek_pc": "a",
-      "status": "ready"
+      "Nomor": 10,
+      "Deskripsi": "Paket 4GB",
+      "jenis": "Paket Mingguan",
+      "akses": "Reguler",
+      "Harga": "Rp. 15.000",
+      "stock": "Tidak terbatas"
     }
   ]
 }
