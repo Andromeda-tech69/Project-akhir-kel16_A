@@ -1,11 +1,18 @@
-import subprocess,importlib,os,time
+import subprocess,importlib,os,time,sys
 
 # Daftar library yang diperlukan
-required_libraries = ['pwinput', 'prettytable']
+required_libraries = ['pwinput', 'prettytable', ]
+
+animation = ["[■□□□□□□□□□]","[■■□□□□□□□□]", "[■■■□□□□□□□]", "[■■■■□□□□□□]", "[■■■■■□□□□□]", "[■■■■■■□□□□]", "[■■■■■■■□□□]", "[■■■■■■■■□□]", "[■■■■■■■■■□]", "[■■■■■■■■■■]\n"]
 
 # Periksa dan instal library yang belum terpasang
 print('Checking library')
+for i in range(len(animation)):
+    time.sleep(0.5)
+    sys.stdout.write("\r" + animation[i % len(animation)])
+    sys.stdout.flush()
 time.sleep(2)
+
 for lib in required_libraries:
     try:
         importlib.import_module(lib)

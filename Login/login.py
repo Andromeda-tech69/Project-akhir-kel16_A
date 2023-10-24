@@ -25,6 +25,7 @@ def main():
         print("1. Login admin")
         print("2. Login Pelanggan")
         print("3. Registrasi")
+        print("4. Exit")
         print("="*30)
         
         masukkan = input("Masukkan input: ")
@@ -98,9 +99,13 @@ def main():
                 with open("LoginData.json", "w") as file:
                     json.dump(pengguna, file, indent=4)
                 print("Registrasi sukses!")
+        
+        
 
 #Keluar dari menu registrasi
                 keluar = input("Ingin keluar? (ya/tidak): ")
                 if keluar.lower() == "ya":
                     clear()
                     break
+                
+        elif masukkan == "4": raise SystemExit
