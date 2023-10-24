@@ -1,4 +1,4 @@
-import json,os
+import json,os,time
 
 from prettytable import PrettyTable
 
@@ -6,6 +6,11 @@ from prettytable import PrettyTable
 ROOT_DIR = os.path.abspath(os.curdir)
 
 import main
+
+def clear():
+    os.system('cls')
+    time.sleep(1)
+
 
 # Fungsi untuk membaca data dari file JSON
 
@@ -110,19 +115,19 @@ def menu():
         pilihan = input("Pilih menu: ")
 
         if pilihan == '1':
-            main.clear()
+            clear()
             create_data(data)
         elif pilihan == '2':
-            main.clear()
+            clear()
             read_data(data)
         elif pilihan == '3':
-            main.clear()
+            clear()
             update_data(data)
         elif pilihan == '4':
-            main.clear()
+            clear()
             delete_data(data)
         elif pilihan == '5':
-            main.clear()
+            clear()
             main.main()
             break
         else:
