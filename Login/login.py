@@ -1,6 +1,10 @@
 import os, time, pwinput, json
 
-# Path Awal
+"""
+
+ROOT_DIR untuk mengatur path dari folder paling awal agar path dinamis dan menghindari error 
+
+"""
 ROOT_DIR = os.path.abspath(os.curdir)
 
 def clear():
@@ -107,5 +111,5 @@ def main():
                 if keluar.lower() == "ya":
                     clear()
                     break
-                
+
         elif masukkan == "4": raise SystemExit
