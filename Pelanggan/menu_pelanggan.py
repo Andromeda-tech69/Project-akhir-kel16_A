@@ -1,58 +1,106 @@
 import json
 from prettytable import PrettyTable
 
-def load_data():
-    with open('data_kamar.json') as file:
-        data_kamar = json.load(file)
-    return data_kamar
 
-def save_data(data_kamar):
-    with open('data_kamar.json', 'w') as file:
-        json.dump(data_kamar, file, indent=2)
+import json
+from prettytable import PrettyTable
 
-def akses_kamar_pelanggan(pelanggan, data_kamar):
-    if pelanggan == "membership":
-        data_kamar["kamar"][0]["akses"] = "Membership"
-        data_kamar["kamar"][1]["akses"] = "Membership"
-        diskon = 10  # Contoh diskon 10%
-        print("Selamat datang, Anda memiliki akses ke kamar VVIP dan VIP.")
-        print(f"Anda mendapatkan diskon {diskon}% untuk penyewaan kamar.")
-    else:
-        print("Selamat datang, Anda memiliki akses ke kamar Umum.")
-    return data_kamar
+def load_data_from_json(Daftar_paket):
+    with open(Daftar_paket, 'r') as file:
+        data = json.load(file)
+    return data
 
-def list_kamar(data_kamar):
+def save_data_to_json(Daftar_paket, data):
+    with open(Daftar_paket, 'w') as file:
+        json.dump(data, file, indent=4)
+
+def lihat_daftar_paket():
+    daftar_paket = load_data_from_json('Daftar_paket.json')
+
     table = PrettyTable()
-    table.field_names = ["Nomor Kamar", "Tipe", "Akses", "Spesifikasi PC"]
-    
-    for kamar in data_kamar["kamar"]:
-        table.add_row([kamar["nomor"], kamar["tipe"], kamar["akses"], kamar["spekPC"]])
-    
+    table.field_names = ["Nomor", "Deskripsi", "Jenis", "Akses", "Harga", "Stok"]
+
+    for paket in daftar_paket:
+        table.add_row([paket["Nomor"], paket["Deskripsi"], paket["jenis"], paket["akses"], paket["Harga"], paket["stock"]])
+
     print(table)
 
-def pilihan_pembayaran():
-    print("Silakan pilih metode pembayaran:")
-    print("1. Pembayaran offline")
-    print("2. Booking secara online")
-    metode = int(input("Pilihan (1/2): "))
-    
-    if metode == 1:
-        print("Anda memilih pembayaran offline.")
-    elif metode == 2:
-        print("Anda memilih booking secara online.")
-        print("Silakan pilih metode pembayaran:")
-        print("1. Uang")
-        print("2. E-money")
-        metode_bayar = int(input("Pilihan (1/2): "))
-        
-        if metode_bayar == 1:
-            print("Anda memilih pembayaran dengan uang.")
-        elif metode_bayar == 2:
-            print("Anda memilih pembayaran dengan E-money.")
-        else:
-            print("Pilihan metode pembayaran tidak valid.")
+def beli_paket(member):
+    daftar_paket = load_data_from_json('daftar_paket.json')
+
+    paket_dibeli = input("Masukkan nomor paket yang ingin dibeli: ")
+
+    for paket in daftar_paket:
+        if paket["Nomor"] == int(paket_dibeli):
+            if (member == "platinum" or member == "gold") and (paket["jenis"] == "Platinum" or paket["jenis"] == "Gold"):
+                if int(paket["stock"]) > 0:
+                    paket["stock"] = str(int(paket["stock"]) - 1)
+                    save_data_to_json('daftar_paket.json', daftar_paket)
+                    print("Paket berhasil dibeli!")
+                else:
+                    print("Maaf, stok paket habis.")
+            elif member == "reguler":
+                if paket["jenis"] == "Reguler":
+                    if int(paket["stock"]) > 0:
+                        paket["stock"] = str(int(paket["stock"]) - 1)
+                        save_data_to_json('daftar_paket.json', daftar_paket)
+                        print("Paket berhasil dibeli!")
+                    else:
+                        print("Maaf, stok paket habis.")
+                else:
+                    print("Anda hanya dapat mengakses paket reguler.")
+            else:
+                print("Anda tidak memiliki akses ke paket ini.")
+            break
     else:
-        print("Pilihan metode pembayaran tidak valid.")
+        print("Nomor paket tidak valid.")
+
+
+def top_up_saldo():
+    jumlah_topup = input("Masukkan jumlah top up saldo: ")
+
+    # Logika untuk menambahkan saldo ke E-money
+    
+
+    print("Saldo berhasil ditambahkan!")
+
+def daftar_membership():
+    membership = input("Pilih jenis membership (platinum/gold): ")
+
+    # Logika untuk mendaftarkan pelanggan sebagai member platinum atau gold
+    
+
+    print("Pendaftaran berhasil!")
+
+# Fungsi utama untuk menjalankan menu
+def main_menu():
+    while True:
+        print("=== Menu Pelanggan ===")
+        print("1. Lihat Daftar Paket")
+        print("2. Beli Paket")
+        print("3. Top Up Saldo E-money")
+        print("4. Daftar Menjadi Member")
+        print("0. Keluar")
+
+        pilihan = input("Masukkan pilihan (0-4): ")
+
+        if pilihan == "1":
+            lihat_daftar_paket()
+        elif pilihan == "2":
+            member = input("Apakah Anda member platinum/gold? (platinum/gold): ")
+            beli_paket(member)
+        elif pilihan == "3":
+            top_up_saldo()
+        elif pilihan == "4":
+            daftar_membership()
+        elif pilihan == "0":
+            print("Terima kasih! Sampai jumpa lagi.")
+            break
+        else:
+            print("Pilihan tidak valid. Silakan coba lagi.")
+
+# Menjalankan menu
+main_menu()
 
 def create_invoice(data_kamar):
     selected_kamar = int(input("Masukkan nomor kamar yang ingin disewa: "))
