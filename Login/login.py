@@ -1,4 +1,11 @@
 import os, time, pwinput, json
+import re
+
+def is_valid_membership_id(membership_id):
+    # Mengecek apakah membership_id memenuhi semua ketentuan
+    pattern = re.compile(r"^(A|S)[A-Z0-9]{5}$")
+    return bool(pattern.match(membership_id))
+
 
 def clear():
     os.system('cls')
@@ -65,6 +72,8 @@ def main():
                             membership_id = input("Masukkan membership ID Anda: ")
                             if membership_id == pelanggan["membership_id"]:
                                 print("Login sukses sebagai pelanggan dengan membership.")
+                                import Pelanggan.menu_pelanggan as pelanggan
+                                pelanggan.menu_pelanggan()
                                 clear()
                             else:
                                 print("Membership ID salah. Silakan coba lagi.")
@@ -86,6 +95,10 @@ def main():
                 is_member = input("Apakah anda member? (ya/tidak): ")
                 if is_member.lower() == "ya":
                     membership_id = input("Masukkan membership ID: ")
+                    if is_valid_membership_id(membership_id):
+                        break
+                    else:
+                        print("Membership ID tidak valid. Pastikan ID memiliki 6 digit.")
                     pengguna_baru = {
                         "username": username,
                         "email": email,

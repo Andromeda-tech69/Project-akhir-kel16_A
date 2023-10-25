@@ -1,6 +1,9 @@
 import json,os,time
-
 from prettytable import PrettyTable
+from colorama import Fore, Back, Style, init
+
+# Inisialisasi Colorama
+init(autoreset=True)
 
 
 # Path Awal
@@ -54,9 +57,9 @@ def create_data(data):
         try:
             data_baru = {
                 "Nomor": len(data["Daftar_paket"]) + 1,
-                "Deskripsi": input("Masukkan Deskripsi: "),
-                "jenis": input("Masukkan jenis: "),
-                "akses": input("Masukkan akses: "),
+                "Deskripsi": str(input("Masukkan Deskripsi: ")),
+                "jenis": str(input("Masukkan jenis: ")),
+                "akses": str(input("Masukkan akses: ")),
                 "Harga": int(input("Masukkan harga: ")),
                 "stock": int(input("Masukkan jumblah stok :")),
             }
@@ -117,15 +120,16 @@ def menu():
     
     while True:
         try:
-            print("Menu:")
-            print("1. Tambah Data")
-            print("2. Baca Data")
-            print("3. Ubah Data")
-            print("4. Hapus Data")
-            print("5. Manage Akun")
-            print("6. Keluar")
+            print(Fore.MAGENTA + "✨" * 20)
+            print(Fore.CYAN + "🚀 Menu Admin:")
+            print(Fore.YELLOW + "1. Tambah Data")
+            print(Fore.GREEN + "2. Baca Data")
+            print(Fore.BLUE + "3. Ubah Data")
+            print(Fore.RED + "4. Hapus Data")
+            print(Fore.MAGENTA + "5. Manage Akun")
+            print(Fore.CYAN + "6. Keluar")
 
-            pilihan = input("Pilih menu: ")
+            pilihan = input(Fore.WHITE + "👉 Pilih menu: ")
 
             if pilihan == '1':
                 clear()
@@ -140,6 +144,8 @@ def menu():
                 clear()
                 delete_data(data)
             elif pilihan == '5':
+                import Admin.userController as admin
+                admin.control_menu()
                 clear()
             elif pilihan == '6':
                 clear()
@@ -147,7 +153,7 @@ def menu():
                 main.main()
                 break
             else:
-                print("Menu tidak valid. Silakan pilih menu yang benar.")
-        except KeyboardInterrupt : 
-            print("\nKeyboardInterrupt")
+                print(Fore.RED + "❌ Menu tidak valid. Silakan pilih menu yang benar.")
+        except KeyboardInterrupt:
+            print("\n" + Fore.YELLOW + "⚠ KeyboardInterrupt")
             continue

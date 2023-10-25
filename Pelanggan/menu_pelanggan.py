@@ -1,141 +1,148 @@
+import os
 import json
+import time
 from prettytable import PrettyTable
+import random
+import string
+from colorama import Fore, Back, Style, init
 
+# Inisialisasi Colorama
+init(autoreset=True)
 
-import json
-from prettytable import PrettyTable
+# Path Awal
+ROOT_DIR = os.path.abspath(os.curdir)
 
-def load_data_from_json(Daftar_paket):
-    with open(Daftar_paket, 'r') as file:
-        data = json.load(file)
-    return data
+def clear():
+    os.system('cls')
+    time.sleep(1)
 
-def save_data_to_json(Daftar_paket, data):
-    with open(Daftar_paket, 'w') as file:
+# Membaca data dari file JSON
+def load_data():
+    try:
+        with open(f"{ROOT_DIR}/dataset/LoginData.json", "r") as file:
+            data = json.load(file)
+            return data
+    except FileNotFoundError:
+        print("File not found. Please check the file path.")
+        return None
+
+# Menyimpan data ke file JSON
+def save_data(data):
+    with open(f"{ROOT_DIR}/dataset/LoginData.json", "w") as file:
         json.dump(data, file, indent=4)
 
-def lihat_daftar_paket():
-    daftar_paket = load_data_from_json('Daftar_paket.json')
+# Fungsi pemberian ID unik pada pelanggan dengan limit 6 digit
+def generate_unique_membership_id(prefix):
+    # Membuat membership_id unik dengan format AXXXXXX (Platinum) atau SXXXXXX (Gold)
+    unique_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+    return prefix + unique_id
 
-    table = PrettyTable()
-    table.field_names = ["Nomor", "Deskripsi", "Jenis", "Akses", "Harga", "Stok"]
-
-    for paket in daftar_paket:
-        table.add_row([paket["Nomor"], paket["Deskripsi"], paket["jenis"], paket["akses"], paket["Harga"], paket["stock"]])
-
-    print(table)
-
-def beli_paket(member):
-    daftar_paket = load_data_from_json('daftar_paket.json')
-
-    paket_dibeli = input("Masukkan nomor paket yang ingin dibeli: ")
-
-    for paket in daftar_paket:
-        if paket["Nomor"] == int(paket_dibeli):
-            if (member == "platinum" or member == "gold") and (paket["jenis"] == "Platinum" or paket["jenis"] == "Gold"):
-                if int(paket["stock"]) > 0:
-                    paket["stock"] = str(int(paket["stock"]) - 1)
-                    save_data_to_json('daftar_paket.json', daftar_paket)
-                    print("Paket berhasil dibeli!")
-                else:
-                    print("Maaf, stok paket habis.")
-            elif member == "reguler":
-                if paket["jenis"] == "Reguler":
-                    if int(paket["stock"]) > 0:
-                        paket["stock"] = str(int(paket["stock"]) - 1)
-                        save_data_to_json('daftar_paket.json', daftar_paket)
-                        print("Paket berhasil dibeli!")
-                    else:
-                        print("Maaf, stok paket habis.")
-                else:
-                    print("Anda hanya dapat mengakses paket reguler.")
-            else:
-                print("Anda tidak memiliki akses ke paket ini.")
-            break
-    else:
-        print("Nomor paket tidak valid.")
-
-
-def top_up_saldo():
-    jumlah_topup = input("Masukkan jumlah top up saldo: ")
-
-    # Logika untuk menambahkan saldo ke E-money
+# Fungsi menu pelanggan
+def menu_pelanggan():
+    data = load_data()
+    if data is None:
+        return
+    pelanggan = data.get("pelanggan", {})
     
-
-    print("Saldo berhasil ditambahkan!")
-
-def daftar_membership():
-        if "membership_id" in pelanggan:
-            if user_data["membership_id"].startswith("A"):
-                print("Platinum Member - You have premium privileges.")
-            elif user_data["membership_id"].startswith("G"):
-                print("Gold Member - You have special privileges.")
-        else:
-            print("Regular Member - You have basic privileges.")
-
-# Fungsi utama untuk menjalankan menu
-def main_menu():
     while True:
-        print("=== Menu Pelanggan ===")
-        print("1. Lihat Daftar Paket")
-        print("2. Beli Paket")
-        print("3. Top Up Saldo E-money")
-        print("4. Daftar Menjadi Member")
-        print("0. Keluar")
-
-        pilihan = input("Masukkan pilihan (0-4): ")
+        print(Fore.MAGENTA + "\n== 🛒 Menu Pelanggan 🛒 ==")
+        print(Fore.CYAN + "1. 📦 Lihat daftar paket")
+        print(Fore.GREEN + "2. 🛍️ Beli paket")
+        print(Fore.BLUE + "3. 💰 Top up saldo e-money")
+        print(Fore.RED + "4. 📋 Daftar sebagai anggota")
+        print(Fore.MAGENTA + "5. 🚪 Keluar")
+        pilihan = input(Fore.WHITE + "👉 Masukkan pilihan (1-5): ")
 
         if pilihan == "1":
-            lihat_daftar_paket()
+    # Menampilkan daftar paket yang tersedia
+            print("\nDaftar Paket yang Tersedia:")
+            for paket in data:
+                if paket["akses"] == pelanggan["membership_id"] and int(paket["stock"]) > 0:
+                    print(f"Nomor: {paket['Nomor']}")
+                    print(f"Deskripsi: {paket['Deskripsi']}")
+                    print(f"Jenis: {paket['jenis']}")
+                    print(f"Harga: {paket['Harga']}")  # Harga sebaiknya tidak diubah
+                    print(f"Stok: {paket['stock']}\n")
         elif pilihan == "2":
-            member = input("Apakah Anda member platinum/gold? (platinum/gold): ")
-            beli_paket(member)
+            customer_access = pelanggan["akses"]
+            # Memproses pembelian paket
+            nomor_paket = int(input("Masukkan nomor paket yang ingin Anda beli: "))
+            for paket in daftar_paket:
+                if paket["Nomor"] == nomor_paket:
+                    if customer_access == "Plat_member":
+                        if paket["stock"] > 0 and pelanggan["saldo_e_money"] >= int(paket["Harga"].replace("Rp. ", "").replace(".", "")):
+                            print("Paket berhasil dibeli.")
+                            pelanggan["saldo_e_money"] -= int(paket["Harga"].replace("Rp. ", "").replace(".", ""))
+                            paket["stock"] -= 1
+                        else:
+                            print("Saldo e-money Anda tidak mencukupi atau paket tidak tersedia.")
+                    elif customer_access == "Gold_member":
+                        if paket["akses"] == "Plat_member":
+                            print("Anda adalah Gold_member, Anda tidak bisa membeli paket Plat_member.")
+                        else:
+                            if paket["stock"] > 0 and pelanggan["saldo_e_money"] >= int(paket["Harga"].replace("Rp. ", "").replace(".", "")):
+                                print("Paket berhasil dibeli.")
+                                pelanggan["saldo_e_money"] -= int(paket["Harga"].replace("Rp. ", "").replace(".", ""))
+                                paket["stock"] -= 1
+                            else:
+                                print("Saldo e-money Anda tidak mencukupi atau paket tidak tersedia.")
+                    elif customer_access == "Reguler":
+                        if paket["akses"] == "Plat_member" or paket["akses"] == "Gold_member":
+                            print("Anda adalah Reguler, Anda tidak bisa membeli paket Plat_member atau Gold_member.")
+                        else:
+                            if paket["stock"] == "Tidak terbatas" or (paket["stock"] > 0 and pelanggan["saldo_e_money"] >= int(paket["Harga"].replace("Rp. ", "").replace(".", ""))):
+                                print("Paket berhasil dibeli.")
+                                if paket["stock"] != "Tidak terbatas":
+                                    pelanggan["saldo_e_money"] -= int(paket["Harga"].replace("Rp. ", "").replace(".", ""))
+                                    paket["stock"] -= 1
+                            else:
+                                print("Saldo e-money Anda tidak mencukupi atau paket tidak tersedia.")
+        
         elif pilihan == "3":
-            top_up_saldo()
+            # Melakukan top up saldo e-money
+            jumlah_topup = int(input("Masukkan jumlah top up saldo e-money (minimal 30.000, maksimal 500.000): "))
+            if 30000 <= jumlah_topup <= 500000:
+                pelanggan["saldo_e_money"] += jumlah_topup
+                print(f"Saldo e-money Anda sekarang: Rp. {pelanggan['saldo_e_money']}")
+            else:
+                print("Jumlah top up tidak valid. Minimal 30.000, maksimal 500.000.")
         elif pilihan == "4":
-            daftar_membership()
-        elif pilihan == "0":
-            print("Terima kasih! Sampai jumpa lagi.")
+            # Mendaftar sebagai anggota
+            if "membership_id" in pelanggan and pelanggan["membership_id"] == "":
+                print("Pilih Jenis Keanggotaan:")
+                print("1. Platinum")
+                print("2. Gold")
+                jenis_anggota = input("Masukkan angka 1 atau 2: ")
+                
+                if jenis_anggota == "1":
+                    prefix = "A"  # Platinum
+                    biaya_daftar = 200000
+                elif jenis_anggota == "2":
+                    prefix = "S"  # Gold
+                    biaya_daftar = 100000
+                else:
+                    print("Pilihan jenis anggota tidak valid.")
+                    continue
+
+                if pelanggan["saldo_e_money"] >= biaya_daftar:
+                    pelanggan["membership_id"] = generate_unique_membership_id(prefix)
+                    pelanggan["saldo_e_money"] -= biaya_daftar
+                    print("Anda telah menjadi anggota.")
+                    print(f"Membership ID Anda: {pelanggan['membership_id']}")
+
+                    # Menyimpan data setelah perubahan
+                    save_data(data)
+                else:
+                    print("Saldo e-money Anda tidak mencukupi untuk mendaftar sebagai anggota.")
+            else:
+                print("Anda sudah menjadi anggota atau belum login.")
+
+        elif pilihan == "5":
+            print("Terima kasih! Sampai jumpa.")
             break
+        
         else:
-            print("Pilihan tidak valid. Silakan coba lagi.")
+            print("Pilihan tidak valid. Silakan pilih kembali.")
 
-# Menjalankan menu
-main_menu()
-
-def create_invoice(data_kamar):
-    selected_kamar = int(input("Masukkan nomor kamar yang ingin disewa: "))
-    
-    if 1 <= selected_kamar <= len(data_kamar["kamar"]):
-        kamar = data_kamar["kamar"][selected_kamar - 1]
-        
-        print("Invoice Pembayaran:")
-        print("Nomor Kamar:", kamar["nomor"])
-        print("Tipe Kamar:", kamar["tipe"])
-        print("Spesifikasi PC:", kamar["spekPC"])
-        
-        # Harga berdasarkan tipe kamar (contoh: VVIP 500.000, VIP 400.000, Umum 300.000)
-        if kamar["tipe"] == "VVIP":
-            harga = 500000
-        elif kamar["tipe"] == "VIP":
-            harga = 400000
-        else:
-            harga = 300000
-        
-        # Diskon jika memiliki akses membership
-        if kamar["akses"] == "Membership":
-            diskon = 10  # Diskon 10%
-            harga -= (harga * diskon / 100)
-        
-        print("Harga (Setelah Diskon):", harga)
-    else:
-        print("Nomor kamar tidak valid.")
-
-# Contoh penggunaan fungsi
-data_kamar = load_data()
-pelanggan = input("Masukkan jenis pelanggan (membership/umum): ")
-data_kamar = akses_kamar_pelanggan(pelanggan, data_kamar)
-list_kamar(data_kamar)
-create_invoice(data_kamar)
-pilihan_pembayaran()
-
+if __name__ == "__main__":
+    menu_pelanggan()
