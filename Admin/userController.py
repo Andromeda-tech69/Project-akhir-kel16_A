@@ -55,33 +55,37 @@ def display_users():
             print("Tidak ada data pelanggan.")
 
 while True:
-    print("\nMenu:")
-    print("1. Hapus Akun")
-    print("2. Urutkan Akun (Ascending)")
-    print("3. Urutkan Akun (Descending)")
-    print("4. Cari Akun")
-    print("5. Tampilkan Akun Pelanggan")
-    print("6. Keluar")
-    choice = input("Pilih tindakan (1/2/3/4/5/6): ")
+    try:
+        print("\nMenu:")
+        print("1. Hapus Akun")
+        print("2. Urutkan Akun (Ascending)")
+        print("3. Urutkan Akun (Descending)")
+        print("4. Cari Akun")
+        print("5. Tampilkan Akun Pelanggan")
+        print("6. Keluar")
+        choice = input("Pilih Menu :  ")
 
-    if choice == "1":
-        username = input("Masukkan username akun yang ingin dihapus: ")
-        delete_user(username)
-    elif choice == "2":
-        sort_users(ascending=True)
-    elif choice == "3":
-        sort_users(ascending=False)
-    elif choice == "4":
-        username = input("Masukkan username akun yang ingin dicari: ")
-        user = search_user(username)
-        if user:
-            print(f"Akun ditemukan: Username: {user['username']}\n, Email: {user['email']}\n, Membership ID: {user['membership_id']}")
+        if choice == "1":
+            username = input("Masukkan username akun yang ingin dihapus: ")
+            delete_user(username)
+        elif choice == "2":
+            sort_users(ascending=True)
+        elif choice == "3":
+            sort_users(ascending=False)
+        elif choice == "4":
+            username = input("Masukkan username akun yang ingin dicari: ")
+            user = search_user(username)
+            if user:
+                print(f"Akun ditemukan: Username: {user['username']}\n, Email: {user['email']}\n, Membership ID: {user['membership_id']}")
+            else:
+                print(f"Akun '{username}' tidak ditemukan.")
+        elif choice == "5":
+            display_users()
+        elif choice == "6":
+            print("Kembali Ke Crud Admin")
+            break
         else:
-            print(f"Akun '{username}' tidak ditemukan.")
-    elif choice == "5":
-        display_users()
-    elif choice == "6":
-        print("Kembali Ke Crud Admin")
-        break
-    else:
-        print("Pilihan tidak valid. Silakan pilih 1, 2, 3, 4, 5, atau 6.")
+            print("Pilihan tidak valid.")
+    except KeyboardInterrupt:
+        print("KeyboardInterrupt")
+        continue
