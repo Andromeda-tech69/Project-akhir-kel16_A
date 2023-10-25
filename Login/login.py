@@ -1,7 +1,5 @@
 import os, time, pwinput, json
 
-
-
 def clear():
     os.system('cls')
     time.sleep(1)
@@ -104,8 +102,6 @@ def main():
                 with open("LoginData.json", "w") as file:
                     json.dump(pengguna, file, indent=4)
                 print("Registrasi sukses!")
-        
-        
 
 #Keluar dari menu registrasi
                 keluar = input("Ingin keluar? (ya/tidak): ")
