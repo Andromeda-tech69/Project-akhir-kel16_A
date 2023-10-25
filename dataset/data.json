@@ -71,14 +71,6 @@
       "akses": "Reguler",
       "Harga": "Rp. 30.000",
       "stock": "Tidak terbatas"
-    },
-    {
-      "Nomor": 10,
-      "Deskripsi": "Paket 4GB",
-      "jenis": "Paket Mingguan",
-      "akses": "Reguler",
-      "Harga": "Rp. 15.000",
-      "stock": "Tidak terbatas"
     }
   ]
 }

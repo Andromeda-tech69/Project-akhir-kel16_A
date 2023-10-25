@@ -1,17 +1,18 @@
 import os, time, pwinput, json
 
-"""
 
-ROOT_DIR untuk mengatur path dari folder paling awal agar path dinamis dan menghindari error 
-
-"""
-ROOT_DIR = os.path.abspath(os.curdir)
 
 def clear():
     os.system('cls')
     time.sleep(1)
 
 def load_data():
+    """
+
+    ROOT_DIR untuk mengatur path dari folder paling awal agar path dinamis dan menghindari error 
+
+    """
+    ROOT_DIR = os.path.abspath(os.curdir)
     try:
         with open(f"{ROOT_DIR}/dataset/LoginData.json", "r") as file:
             data = json.load(file)

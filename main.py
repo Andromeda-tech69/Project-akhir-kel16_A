@@ -11,7 +11,6 @@ for i in range(len(animation)):
     time.sleep(0.5)
     sys.stdout.write("\r" + animation[i % len(animation)])
     sys.stdout.flush()
-time.sleep(2)
 
 for lib in required_libraries:
     try:
@@ -31,8 +30,8 @@ if __name__ == "__main__":
     while True:
         try:
             login.main()
-        except Exception as e:
-            print(e)
+        # except Exception as e:
+        #     print(e)
         except KeyboardInterrupt:
             os.system('cls')
             print("\nKeyboard Interrupt")
