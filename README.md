@@ -16,7 +16,7 @@ Proyek ini adalah bagian dari praktikum Sistem Layanan Internet dan bertujuan un
             - Fitur 5: Delete User.
             - Fitur 6: Sorting User.
             - Fitur 7: Searching User.
-            - Fitur 7: Read Data User.
+            - Fitur 8: Read Data User.
 
 - [ ] Pelanggan :  
             
