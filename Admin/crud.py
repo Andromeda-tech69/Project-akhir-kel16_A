@@ -141,8 +141,6 @@ def menu():
                 delete_data(data)
             elif pilihan == '5':
                 clear()
-                from 
-                
             elif pilihan == '6':
                 clear()
                 import main
