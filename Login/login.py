@@ -1,6 +1,12 @@
 import os, time, pwinput, json
 import re
+from colorama import Fore, Back, Style, init
 
+# Inisialisasi Colorama
+init(autoreset=True)
+
+
+init(autoreset = True)
 def is_valid_membership_id(membership_id):
     # Mengecek apakah membership_id memenuhi semua ketentuan
     pattern = re.compile(r"^(A|S)[A-Z0-9]{5}$")
@@ -27,19 +33,16 @@ def load_data():
         raise SystemExit
 
 def main():
-
-    pengguna = load_data()
-    
     while True:
-        print("="*30)
-        print("1. Login admin")
-        print("2. Login Pelanggan")
-        print("3. Registrasi")
-        print("4. Exit")
-        print("="*30)
-        
-        masukkan = input("Masukkan input: ")
-        
+        print(Fore.YELLOW + "=" * 30)
+        print(Fore.MAGENTA + "👑 1. Login Admin")
+        print(Fore.CYAN + "🛒 2. Login Pelanggan")
+        print(Fore.GREEN + "📋 3. Registrasi")
+        print(Fore.RED + "🚪 4. Exit")
+        print(Fore.YELLOW  + "=" * 30)
+
+        masukkan = input(Fore.WHITE + "Masukkan input: ")
+
         if masukkan == "1":
             username_or_email = input("Masukkan username atau email: ")
             password = pwinput.pwinput(prompt="Masukkan password: ")

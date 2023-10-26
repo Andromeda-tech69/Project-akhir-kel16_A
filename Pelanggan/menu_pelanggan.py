@@ -1,9 +1,5 @@
-import os
-import json
-import time
+import os, json, time, random, string
 from prettytable import PrettyTable
-import random
-import string
 from colorama import Fore, Back, Style, init
 
 # Inisialisasi Colorama
@@ -54,15 +50,16 @@ def menu_pelanggan():
         pilihan = input(Fore.WHITE + "👉 Masukkan pilihan (1-5): ")
 
         if pilihan == "1":
-    # Menampilkan daftar paket yang tersedia
+# Menampilkan daftar paket yang tersedia
             print("\nDaftar Paket yang Tersedia:")
-            for paket in data:
-                if paket["akses"] == pelanggan["membership_id"] and int(paket["stock"]) > 0:
-                    print(f"Nomor: {paket['Nomor']}")
-                    print(f"Deskripsi: {paket['Deskripsi']}")
-                    print(f"Jenis: {paket['jenis']}")
-                    print(f"Harga: {paket['Harga']}")  # Harga sebaiknya tidak diubah
-                    print(f"Stok: {paket['stock']}\n")
+            for paket in pelanggan:  # Mengganti 'data' dengan 'pelanggan'
+                if "akses" in paket and "stock" in paket:
+                    if paket["akses"] == pelanggan["membership_id"] and int(paket["stock"]) > 0:
+                        print(f"Nomor: {paket['Nomor']}")
+                        print(f"Deskripsi: {paket['Deskripsi']}")
+                        print(f"Jenis: {paket['jenis']}")
+                        print(f"Harga: {paket['Harga']}")  # Harga sebaiknya tidak diubah
+                        print(f"Stok: {paket['stock']}\n")
         elif pilihan == "2":
             customer_access = pelanggan["akses"]
             # Memproses pembelian paket
