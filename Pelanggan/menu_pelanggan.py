@@ -50,16 +50,20 @@ def menu_pelanggan():
         pilihan = input(Fore.WHITE + "👉 Masukkan pilihan (1-5): ")
 
         if pilihan == "1":
-# Menampilkan daftar paket yang tersedia
-            print("\nDaftar Paket yang Tersedia:")
-            for paket in pelanggan:  # Mengganti 'data' dengan 'pelanggan'
-                if "akses" in paket and "stock" in paket:
-                    if paket["akses"] == pelanggan["membership_id"] and int(paket["stock"]) > 0:
-                        print(f"Nomor: {paket['Nomor']}")
-                        print(f"Deskripsi: {paket['Deskripsi']}")
-                        print(f"Jenis: {paket['jenis']}")
-                        print(f"Harga: {paket['Harga']}")  # Harga sebaiknya tidak diubah
-                        print(f"Stok: {paket['stock']}\n")
+            pelanggan = load_data()
+
+            if pelanggan is not None:
+                if pilihan == "1":
+                    # Menampilkan daftar paket yang tersedia
+                    for paket in pelanggan.get("Daftar_paket", []):  # Mengakses "Daftar_paket" dalam pelanggan
+                        print("\nDaftar Paket yang Tersedia:")
+                        if "akses" in paket and "stock" in paket:
+                            if pelanggan.get("membership_id") and int(paket.get("stock", 0)) > 0:
+                                print(f"Nomor: {paket.get('Nomor', '')}")
+                                print(f"Deskripsi: {paket.get('Deskripsi', '')}")
+                                print(f"Jenis: {paket.get('jenis', '')}")
+                                print(f"Harga: {paket.get('Harga', '')}")
+                                print(f"Stok: {paket.get('stock', '')}\n")
         elif pilihan == "2":
             customer_access = pelanggan["akses"]
             # Memproses pembelian paket
