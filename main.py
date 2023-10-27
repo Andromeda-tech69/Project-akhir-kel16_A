@@ -8,7 +8,7 @@ animation = ["[■□□□□□□□□□]","[■■□□□□□□□□
 # Periksa dan instal library yang belum terpasang
 print('Checking library')
 for i in range(len(animation)):
-    time.sleep(0.5)
+    time.sleep(0.3)
     sys.stdout.write("\r" + animation[i % len(animation)])
     sys.stdout.flush()
 

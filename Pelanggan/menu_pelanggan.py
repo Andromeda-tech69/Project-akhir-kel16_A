@@ -12,6 +12,28 @@ def clear():
     os.system('cls')
     time.sleep(1)
 
+def load():
+    try:
+        with open(f"{ROOT_DIR}/dataset/data.json", "r") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        data = {"Daftar_paket": []}
+    return data
+
+# Fungsi untuk menyimpan data ke file JSON
+def save_data(data):
+    try:
+        with open(f"{ROOT_DIR}/dataset/data.json", "w") as file:
+            json.dump(data, file, indent=2)
+    except FileNotFoundError: print("File Not Found")
+        
+def read_data(data):
+    Daftar_paket = data["Daftar_paket"]
+
+    if not Daftar_paket:
+        print("Tidak ada data 'Daftar_paket' dalam file JSON.")
+        return
+
 # Membaca data dari file JSON
 def load_data():
     try:
@@ -33,12 +55,37 @@ def generate_unique_membership_id(prefix):
     unique_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
     return prefix + unique_id
 
+def show_available_packages(Daftar_paket, membership_id):
+    if "Daftar_paket" in Daftar_paket:
+        data = Daftar_paket["Daftar_paket"]
+        if data:
+            table = PrettyTable()
+            table.field_names = ["Nomor", "Deskripsi", "Jenis", "Harga", "Stok"]
+
+            for paket in data:
+                if "akses" in paket and "stock" in paket:
+                    if paket["akses"] == membership_id and (paket["stock"] == "Tidak terbatas" or int(paket["stock"]) > 0):
+                        table.add_row([paket.get("Nomor", ""),
+                                        paket.get("Deskripsi", ""),
+                                        paket.get("jenis", ""),
+                                        paket.get("Harga", ""),
+                                        paket.get("stock", "")])
+
+            print(table)
+        else:
+            print("Tidak ada data 'Daftar_paket' dalam file JSON.")
+    else:
+        print("Tidak ada data 'Daftar_paket' dalam file JSON.")
+
 # Fungsi menu pelanggan
 def menu_pelanggan():
-    data = load_data()
+    data = load_data()  # Memuat data pelanggan
     if data is None:
         return
-    pelanggan = data.get("pelanggan", {})
+
+    Daftar_paket = load()  # Memuat data Daftar_paket
+    if Daftar_paket is None:
+        return
     
     while True:
         print(Fore.MAGENTA + "\n== 🛒 Menu Pelanggan 🛒 ==")
@@ -50,55 +97,56 @@ def menu_pelanggan():
         pilihan = input(Fore.WHITE + "👉 Masukkan pilihan (1-5): ")
 
         if pilihan == "1":
-            pelanggan = load_data()
-
-            if pelanggan is not None:
-                if pilihan == "1":
-                    # Menampilkan daftar paket yang tersedia
-                    for paket in pelanggan.get("Daftar_paket", []):  # Mengakses "Daftar_paket" dalam pelanggan
-                        print("\nDaftar Paket yang Tersedia:")
-                        if "akses" in paket and "stock" in paket:
-                            if pelanggan.get("membership_id") and int(paket.get("stock", 0)) > 0:
-                                print(f"Nomor: {paket.get('Nomor', '')}")
-                                print(f"Deskripsi: {paket.get('Deskripsi', '')}")
-                                print(f"Jenis: {paket.get('jenis', '')}")
-                                print(f"Harga: {paket.get('Harga', '')}")
-                                print(f"Stok: {paket.get('stock', '')}\n")
+            membership_id = data.get("membership_id", "")
+            show_available_packages(Daftar_paket, membership_id)
         elif pilihan == "2":
-            customer_access = pelanggan["akses"]
-            # Memproses pembelian paket
-            nomor_paket = int(input("Masukkan nomor paket yang ingin Anda beli: "))
-            for paket in daftar_paket:
-                if paket["Nomor"] == nomor_paket:
+            Daftar_paket = load()  # Menginisialisasi variabel Daftar_paket dengan data dari file JSON
+            if Daftar_paket is None:
+                return
+                while True:
+                # Memproses pembelian paket
+                    nomor_paket = int(input("Masukkan nomor paket yang ingin Anda beli: "))
+                
+                # Gunakan loop untuk mencari paket yang sesuai
+                    selected_package = None
+                    for paket in Daftar_paket:
+                        if paket["Nomor"] == nomor_paket:
+                            selected_package = paket
+                            break  # Keluar dari loop setelah menemukan paket yang sesuai
+                
+                if selected_package:
+                    customer_access = selected_package["akses"]
                     if customer_access == "Plat_member":
-                        if paket["stock"] > 0 and pelanggan["saldo_e_money"] >= int(paket["Harga"].replace("Rp. ", "").replace(".", "")):
+                        if int(selected_package["stock"]) > 0 and pelanggan["saldo_e_money"] >= int(selected_package["Harga"].replace("Rp. ", "").replace(".", "")):
                             print("Paket berhasil dibeli.")
-                            pelanggan["saldo_e_money"] -= int(paket["Harga"].replace("Rp. ", "").replace(".", ""))
-                            paket["stock"] -= 1
+                            pelanggan["saldo_e_money"] -= int(selected_package["Harga"].replace("Rp. ", "").replace(".", ""))
+                            selected_package["stock"] = str(int(selected_package["stock"]) - 1)  # Kurangi stok
                         else:
                             print("Saldo e-money Anda tidak mencukupi atau paket tidak tersedia.")
                     elif customer_access == "Gold_member":
-                        if paket["akses"] == "Plat_member":
+                        if selected_package["akses"] == "Plat_member":
                             print("Anda adalah Gold_member, Anda tidak bisa membeli paket Plat_member.")
                         else:
-                            if paket["stock"] > 0 and pelanggan["saldo_e_money"] >= int(paket["Harga"].replace("Rp. ", "").replace(".", "")):
+                            if int(selected_package["stock"]) > 0 and pelanggan["saldo_e_money"] >= int(selected_package["Harga"].replace("Rp. ", "").replace(".", "")):
                                 print("Paket berhasil dibeli.")
-                                pelanggan["saldo_e_money"] -= int(paket["Harga"].replace("Rp. ", "").replace(".", ""))
-                                paket["stock"] -= 1
+                                pelanggan["saldo_e_money"] -= int(selected_package["Harga"].replace("Rp. ", "").replace(".", ""))
+                                selected_package["stock"] = str(int(selected_package["stock"]) - 1)  # Kurangi stok
                             else:
                                 print("Saldo e-money Anda tidak mencukupi atau paket tidak tersedia.")
                     elif customer_access == "Reguler":
-                        if paket["akses"] == "Plat_member" or paket["akses"] == "Gold_member":
+                        if selected_package["akses"] == "Plat_member" or selected_package["akses"] == "Gold_member":
                             print("Anda adalah Reguler, Anda tidak bisa membeli paket Plat_member atau Gold_member.")
                         else:
-                            if paket["stock"] == "Tidak terbatas" or (paket["stock"] > 0 and pelanggan["saldo_e_money"] >= int(paket["Harga"].replace("Rp. ", "").replace(".", ""))):
+                            if selected_package["stock"] == "Tidak terbatas" or (int(selected_package["stock"])) > 0 and pelanggan["saldo_e_money"] >= int(selected_package["Harga"].replace("Rp. ", "").replace(".", "")):
                                 print("Paket berhasil dibeli.")
-                                if paket["stock"] != "Tidak terbatas":
-                                    pelanggan["saldo_e_money"] -= int(paket["Harga"].replace("Rp. ", "").replace(".", ""))
-                                    paket["stock"] -= 1
+                                if selected_package["stock"] != "Tidak terbatas":
+                                    pelanggan["saldo_e_money"] -= int(selected_package["Harga"].replace("Rp. ", "").replace(".", ""))
+                                    selected_package["stock"] = str(int(selected_package["stock"]) - 1)  # Kurangi stok
                             else:
                                 print("Saldo e-money Anda tidak mencukupi atau paket tidak tersedia.")
-        
+                else:
+                    print("Nomor paket tidak valid. Silakan coba lagi.")
+
         elif pilihan == "3":
             # Melakukan top up saldo e-money
             jumlah_topup = int(input("Masukkan jumlah top up saldo e-money (minimal 30.000, maksimal 500.000): "))
