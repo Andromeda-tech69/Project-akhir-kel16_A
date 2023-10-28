@@ -159,9 +159,6 @@ def menu():
                 clear()
             elif pilihan == "6":
                 clear()
-                import main
-
-                main.main()
                 break
             else:
                 print(Fore.RED + "❌ Menu tidak valid. Silakan pilih menu yang benar.")
