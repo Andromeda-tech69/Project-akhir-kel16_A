@@ -1,4 +1,5 @@
-import json,os
+import json, os
+from colorama import Fore, Back, Style, init
 from prettytable import PrettyTable
 
 # Path Awal
@@ -8,10 +9,12 @@ ROOT_DIR = os.path.abspath(os.curdir)
 with open(f"{ROOT_DIR}/dataset/Logindata.json", "r") as file:
     data = json.load(file)
 
+
 def save_data():
     # Menyimpan data kembali ke Logindata.json
     with open(f"{ROOT_DIR}/dataset/Logindata.json", "w") as file:
         json.dump(data, file, indent=4)
+
 
 def delete_user(username):
     if username == "admin":
@@ -27,13 +30,17 @@ def delete_user(username):
                 return
     print(f"Akun '{username}' tidak ditemukan.")
 
+
 def sort_users(ascending=True):
     if "pelanggan" in data:
-        data["pelanggan"] = sorted(data["pelanggan"], key=lambda x: x["username"], reverse=not ascending)
+        data["pelanggan"] = sorted(
+            data["pelanggan"], key=lambda x: x["username"], reverse=not ascending
+        )
         save_data()
         order = "ascending" if ascending else "descending"
         print(f"Akun pelanggan telah diurutkan {order} berdasarkan nama pengguna.")
     display_users()
+
 
 def search_user(username):
     if "pelanggan" in data:
@@ -42,29 +49,39 @@ def search_user(username):
                 return user
     return None
 
+
 # Menampilkan daftar akun pelanggan dengan PrettyTable
 def display_users():
     if "pelanggan" in data:
         table = PrettyTable()
         if data["pelanggan"]:
-            table.field_names = data["pelanggan"][0].keys()  # Ambil keys dari entri pertama dalam list pelanggan
+            table.field_names = data["pelanggan"][
+                0
+            ].keys()  # Ambil keys dari entri pertama dalam list pelanggan
             for user in data["pelanggan"]:
                 table.add_row(user.values())
             print(table)
         else:
             print("Tidak ada data pelanggan.")
 
-def control_menu() :
+
+def control_menu():
     while True:
         try:
-            print("\nMenu:")
-            print("1. Hapus Akun")
-            print("2. Urutkan Akun (Ascending)")
-            print("3. Urutkan Akun (Descending)")
-            print("4. Cari Akun")
-            print("5. Tampilkan Akun Pelanggan")
-            print("6. Keluar")
-            choice = input("Pilih Menu :  ")
+            print("\n🌟🌈🌟🌈🌟🌈🌟🌈🌟🌈🌟🌈🌟🌈🌟🌈🌟")
+            print("🐍   Menu Manage User   🐍")
+            print("🌟🌈🌟🌈🌟🌈🌟🌈🌟🌈🌟🌈🌟🌈🌟🌈🌟")
+
+            print(Fore.LIGHTBLUE_EX+ "\n📋 Menu:")
+            print(Fore.RED+ "1. 🗑️ Hapus Akun")
+            print(Fore.LIGHTCYAN_EX+ "2. 🔢 Urutkan Akun (Ascending)")
+            print(Fore.LIGHTGREEN_EX+ "3. 🔣 Urutkan Akun (Descending)")
+            print(Fore.YELLOW+ "4. 🔍 Cari Akun")
+            print(Fore.GREEN+ "5. 📄 Tampilkan Akun Pelanggan")
+            print(Fore.LIGHTRED_EX+ "6. 🚪 Keluar")
+            
+            choice = input("🚀 Pilih Menu: ")
+
 
             if choice == "1":
                 username = input("Masukkan username akun yang ingin dihapus: ")

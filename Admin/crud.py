@@ -1,4 +1,4 @@
-import json,os,time
+import json, os, time
 from prettytable import PrettyTable
 from colorama import Fore, Back, Style, init
 
@@ -11,11 +11,12 @@ ROOT_DIR = os.path.abspath(os.curdir)
 
 
 def clear():
-    os.system('cls')
+    os.system("cls")
     time.sleep(1)
 
 
 # Fungsi untuk membaca data dari file JSON
+
 
 def load():
     try:
@@ -25,13 +26,16 @@ def load():
         data = {"Daftar_paket": []}
     return data
 
+
 # Fungsi untuk menyimpan data ke file JSON
 def save_data(data):
     try:
         with open(f"{ROOT_DIR}/dataset/data.json", "w") as file:
             json.dump(data, file, indent=2)
-    except FileNotFoundError: print("File Not Found")
-        
+    except FileNotFoundError:
+        print("File Not Found")
+
+
 def read_data(data):
     Daftar_paket = data["Daftar_paket"]
 
@@ -40,7 +44,7 @@ def read_data(data):
         return
 
     table = PrettyTable()
-    
+
     # Mengambil nama kolom dari kunci (keys) JSON pertama
     field_names = Daftar_paket[0].keys()
     table.field_names = field_names
@@ -50,9 +54,10 @@ def read_data(data):
 
     print(table)
 
+
 # Fungsi untuk menambahkan data baru
 def create_data(data):
-    os.system('cls')
+    os.system("cls")
     while True:
         try:
             data_baru = {
@@ -79,7 +84,8 @@ def update_data(data):
         try:
             nomor = int(input("Masukkan nomor paket yang ingin diubah: "))
             break
-        except:print("Masukan Dengan Benar")
+        except:
+            print("Masukan Dengan Benar")
     for entry in data["Daftar_paket"]:
         if entry["Nomor"] == nomor:
             while True:
@@ -95,8 +101,9 @@ def update_data(data):
                         print("Masukkan Dengan Benar")
                 save_data(data)
                 print("Data berhasil diubah.")
-                return 
+                return
     print("Nomor kamar tidak ditemukan.")
+
 
 # Fungsi untuk menghapus data
 def delete_data(data):
@@ -105,7 +112,8 @@ def delete_data(data):
         try:
             nomor = int(input("Masukkan nomor paket yang ingin dihapus: "))
             break
-        except: print("Masukan Dengan Benar")
+        except:
+            print("Masukan Dengan Benar")
     for entry in data["Daftar_paket"]:
         if entry["Nomor"] == nomor:
             data["Daftar_paket"].remove(entry)
@@ -114,10 +122,11 @@ def delete_data(data):
             return
     print("Nomor paket tidak ditemukan.")
 
+
 def menu():
     # Program utama
     data = load()
-    
+
     while True:
         try:
             print(Fore.MAGENTA + "✨" * 20)
@@ -131,25 +140,27 @@ def menu():
 
             pilihan = input(Fore.WHITE + "👉 Pilih menu: ")
 
-            if pilihan == '1':
+            if pilihan == "1":
                 clear()
                 create_data(data)
-            elif pilihan == '2':
+            elif pilihan == "2":
                 clear()
                 read_data(data)
-            elif pilihan == '3':
+            elif pilihan == "3":
                 clear()
                 update_data(data)
-            elif pilihan == '4':
+            elif pilihan == "4":
                 clear()
                 delete_data(data)
-            elif pilihan == '5':
+            elif pilihan == "5":
                 import Admin.userController as admin
+
                 admin.control_menu()
                 clear()
-            elif pilihan == '6':
+            elif pilihan == "6":
                 clear()
                 import main
+
                 main.main()
                 break
             else:
