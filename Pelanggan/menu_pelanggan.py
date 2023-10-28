@@ -15,7 +15,7 @@ def clear():
 # Membaca data dari file JSON
 def load_data():
     try:
-        with open(f"{ROOT_DIR}/dataset/LoginData.json", "r") as file:
+        with open(f"{ROOT_DIR}/dataset/data.json", "r") as file:
             data = json.load(file)
             return data
     except FileNotFoundError:
@@ -24,7 +24,7 @@ def load_data():
 
 # Menyimpan data ke file JSON
 def save_data(data):
-    with open(f"{ROOT_DIR}/dataset/LoginData.json", "w") as file:
+    with open(f"{ROOT_DIR}/dataset/data.json", "w") as file:
         json.dump(data, file, indent=4)
 
 # Fungsi pemberian ID unik pada pelanggan dengan limit 6 digit
@@ -33,8 +33,17 @@ def generate_unique_membership_id(prefix):
     unique_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
     return prefix + unique_id
 
+def daftar_paket(data):
+    table = PrettyTable()
+    table.field_names = list(data['Daftar_paket'][0].keys())
+
+    for paket in data['Daftar_paket']:
+        table.add_row(list(paket.values()))
+
+    print(table)
+
 # Fungsi menu pelanggan
-def menu_pelanggan():
+def menu_pelanggan(user_role):
     data = load_data()
     if data is None:
         return
@@ -50,20 +59,7 @@ def menu_pelanggan():
         pilihan = input(Fore.WHITE + "👉 Masukkan pilihan (1-5): ")
 
         if pilihan == "1":
-            pelanggan = load_data()
-
-            if pelanggan is not None:
-                if pilihan == "1":
-                    # Menampilkan daftar paket yang tersedia
-                    for paket in pelanggan.get("Daftar_paket", []):  # Mengakses "Daftar_paket" dalam pelanggan
-                        print("\nDaftar Paket yang Tersedia:")
-                        if "akses" in paket and "stock" in paket:
-                            if pelanggan.get("membership_id") and int(paket.get("stock", 0)) > 0:
-                                print(f"Nomor: {paket.get('Nomor', '')}")
-                                print(f"Deskripsi: {paket.get('Deskripsi', '')}")
-                                print(f"Jenis: {paket.get('jenis', '')}")
-                                print(f"Harga: {paket.get('Harga', '')}")
-                                print(f"Stok: {paket.get('stock', '')}\n")
+            daftar_paket(data)
         elif pilihan == "2":
             customer_access = pelanggan["akses"]
             # Memproses pembelian paket

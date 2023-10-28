@@ -71,27 +71,30 @@ def main():
                 for pelanggan in pengguna["pelanggan"]:
                     if (pelanggan["username"] == username_or_email or pelanggan["email"] == username_or_email) and pelanggan["password"] == password:
                         print("Login sukses.")
+                        
+                        # import Pelanggan.menu_pelanggan as pelanggan
+                        # pelanggan.menu_pelanggan("pelanggan")
+                        # membership_choice = input("Apakah Anda memiliki membership? (ya/tidak): ")
 
-                        membership_choice = input("Apakah Anda memiliki membership? (ya/tidak): ")
-
-                        if membership_choice.lower() == "ya":
-                            if "membership_id" in pelanggan:
-                                membership_id = input("Masukkan membership ID Anda: ")
-                                if membership_id == pelanggan["membership_id"]:
-                                    print("Login sukses sebagai pelanggan dengan membership.")
-                                    import Pelanggan.menu_pelanggan as pelanggan
-                                    pelanggan.menu_pelanggan()
-                                    clear()
-                                else:
-                                    print("Membership ID salah. Silakan coba lagi.")
-                                    clear()
-                            else:
-                                print("Anda tidak memiliki membership. Silakan coba lagi.")
-                                clear()
-                        break
-                else:
-                    print("Login gagal. Silakan coba lagi.")
-                    clear()
+                        # if membership_choice.lower() == "ya":
+                        #     if "membership_id" in pelanggan:
+                        #         membership_id = input("Masukkan membership ID Anda: ")
+                        #         if membership_id == pelanggan["membership_id"]:
+                        #             print("Login sukses sebagai pelanggan dengan membership.")
+                        #             import Pelanggan.menu_pelanggan as pelanggan
+                        #             pelanggan.menu_pelanggan()
+                        #             clear()
+                        #         else:
+                        #             print("Membership ID salah. Silakan coba lagi.")
+                        #             clear()
+                        #     else:
+                        #         print("Anda tidak memiliki membership. Silakan coba lagi.")
+                        #         clear()
+                        # break
+                    else:
+                        print("Login gagal. Silakan coba lagi.")
+                        time.sleep(1)
+                        # clear()
                     
         elif masukkan == "3":
             pengguna = load_data()

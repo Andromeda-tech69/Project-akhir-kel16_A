@@ -77,7 +77,7 @@ def control_menu() :
                 username = input("Masukkan username akun yang ingin dicari: ")
                 user = search_user(username)
                 if user:
-                    print(f"Akun ditemukan: Username: {user['username']}\n, Email: {user['email']}\n, Membership ID: {user['membership_id']}")
+                    print(f"Akun ditemukan: Username: {user['username']},\nEmail: {user['email']},\nMembership ID: {user['membership_id']}")
                 else:
                     print(f"Akun '{username}' tidak ditemukan.")
             elif choice == "5":

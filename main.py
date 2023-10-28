@@ -1,7 +1,7 @@
 import subprocess,importlib,os,time,sys
 
 # Daftar library yang diperlukan
-required_libraries = ['pwinput', 'prettytable', ]
+required_libraries = ['pwinput', 'prettytable', 'colorama']
 
 animation = ["[■□□□□□□□□□]","[■■□□□□□□□□]", "[■■■□□□□□□□]", "[■■■■□□□□□□]", "[■■■■■□□□□□]", "[■■■■■■□□□□]", "[■■■■■■■□□□]", "[■■■■■■■■□□]", "[■■■■■■■■■□]", "[■■■■■■■■■■]\n"]
 
