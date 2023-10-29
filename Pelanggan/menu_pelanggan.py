@@ -56,14 +56,6 @@ def save_data(data):
     with open(f"{ROOT_DIR}/dataset/data.json", "w") as file:
         json.dump(data, file, indent=4)
 
-
-# Fungsi pemberian ID unik pada pelanggan dengan limit 6 digit
-def generate_unique_membership_id(prefix):
-    # Membuat membership_id unik dengan format AXXXXXX (Platinum) atau SXXXXXX (Gold)
-    unique_id = "".join(random.choices(
-        string.ascii_uppercase + string.digits, k=6))
-    return prefix + unique_id
-
 def daftar_paket(data):
     if data['Daftar_paket']:
         table = PrettyTable()
@@ -92,60 +84,61 @@ def menu_pelanggan(user_role):
             daftar_paket(data)
         elif pilihan == "2":
             daftar_paket(data)
+            pilih = int(input("Masukan Pilihan : "))
             for i in data['Daftar_paket']:
-                pilih = int(input("Masukan Pilihan : "))
                 if i['Nomor'] == pilih:
                     print(i['Deskripsi'])
-        # elif pilihan == "3":
-        #     # Melakukan top up saldo e-money
-        #     jumlah_topup = int(
-        #         input(
-        #             "Masukkan jumlah top up saldo e-money (minimal 30.000, maksimal 500.000): "
-        #         )
-        #     )
-        #     if 30000 <= jumlah_topup <= 500000:
-        #         pelanggan["saldo_e_money"] += jumlah_topup
-        #         print(
-        #             f"Saldo e-money Anda sekarang: Rp. {pelanggan['saldo_e_money']}")
-        #     else:
-        #         print("Jumlah top up tidak valid. Minimal 30.000, maksimal 500.000.")
-        # elif pilihan == "4":
-        #     # Mendaftar sebagai anggota
-        #     if "membership_id" in pelanggan and pelanggan["membership_id"] == "":
-        #         print("Pilih Jenis Keanggotaan:")
-        #         print("1. Platinum")
-        #         print("2. Gold")
-        #         jenis_anggota = input("Masukkan angka 1 atau 2: ")
+        elif pilihan == "3":
+            user = user_role
+            # Melakukan top up saldo e-money
+            jumlah_topup = int(
+                input(
+                    "Masukkan jumlah top up saldo e-money (MIN 30.000, MAX 500.000): "
+                )
+            )
+            if 30000 <= jumlah_topup <= 500000:
+                user["saldo_e_money"] += jumlah_topup
+                print(
+                    f"Saldo e-money Anda sekarang: Rp. {user['saldo_e_money']}")
+            else:
+                print("Jumlah top up tidak valid. Minimal 30.000, maksimal 500.000.")
+        elif pilihan == "4":
+            # Mendaftar sebagai anggota
+            if "membership_id" in pelanggan and pelanggan["membership_id"] == "":
+                print("Pilih Jenis Keanggotaan:")
+                print("1. Platinum")
+                print("2. Gold")
+                jenis_anggota = input("Masukkan angka 1 atau 2: ")
 
-        #         if jenis_anggota == "1":
-        #             prefix = "A"  # Platinum
-        #             biaya_daftar = 200000
-        #         elif jenis_anggota == "2":
-        #             prefix = "S"  # Gold
-        #             biaya_daftar = 100000
-        #         else:
-        #             print("Pilihan jenis anggota tidak valid.")
-        #             continue
+                if jenis_anggota == "1":
+                    prefix = "A"  # Platinum
+                    biaya_daftar = 200000
+                elif jenis_anggota == "2":
+                    prefix = "S"  # Gold
+                    biaya_daftar = 100000
+                else:
+                    print("Pilihan jenis anggota tidak valid.")
+                    continue
 
-        #         if pelanggan["saldo_e_money"] >= biaya_daftar:
-        #             pelanggan["membership_id"] = generate_unique_membership_id(
-        #                 prefix)
-        #             pelanggan["saldo_e_money"] -= biaya_daftar
-        #             print("Anda telah menjadi anggota.")
-        #             print(f"Membership ID Anda: {pelanggan['membership_id']}")
+                if pelanggan["saldo_e_money"] >= biaya_daftar:
+                    pelanggan["membership_id"] = generate_unique_membership_id(
+                        prefix)
+                    pelanggan["saldo_e_money"] -= biaya_daftar
+                    print("Anda telah menjadi anggota.")
+                    print(f"Membership ID Anda: {pelanggan['membership_id']}")
 
-        #             # Menyimpan data setelah perubahan
-        #             save_data(data)
-        #         else:
-        #             print(
-        #                 "Saldo e-money Anda tidak mencukupi untuk mendaftar sebagai anggota."
-        #             )
-        #     else:
-        #         print("Anda sudah menjadi anggota atau belum login.")
+                    # Menyimpan data setelah perubahan
+                    save_data(data)
+                else:
+                    print(
+                        "Saldo e-money Anda tidak mencukupi untuk mendaftar sebagai anggota."
+                    )
+            else:
+                print("Anda sudah menjadi anggota atau belum login.")
 
-        # elif pilihan == "5":
-        #     print("Terima kasih! Sampai jumpa.")
-        #     break
+        elif pilihan == "5":
+            print("Terima kasih! Sampai jumpa.")
+            break
 
         else:
             print("Pilihan tidak valid. Silakan pilih kembali.")
