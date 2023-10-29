@@ -64,48 +64,21 @@ def generate_unique_membership_id(prefix):
         string.ascii_uppercase + string.digits, k=6))
     return prefix + unique_id
 
+def daftar_paket(data):
+    if data['Daftar_paket']:
+        table = PrettyTable()
+        table.field_names = list(data['Daftar_paket'][0].keys())
 
-def show_available_packages(Daftar_paket, membership_id):
-    if "Daftar_paket" in Daftar_paket:
-        data = Daftar_paket["Daftar_paket"]
-        if data:
-            table = PrettyTable()
-            table.field_names = [
-                "Nomor", "Deskripsi", "Jenis", "Harga", "Stok"]
+        for paket in data['Daftar_paket']:
+            table.add_row(list(paket.values()))
 
-            for paket in data:
-                if "akses" in paket and "stock" in paket:
-                    if paket["akses"] == membership_id and (
-                        paket["stock"] == "Tidak terbatas" or int(
-                            paket["stock"]) > 0
-                    ):
-                        table.add_row(
-                            [
-                                paket.get("Nomor", ""),
-                                paket.get("Deskripsi", ""),
-                                paket.get("jenis", ""),
-                                paket.get("Harga", ""),
-                                paket.get("stock", ""),
-                            ]
-                        )
-
-            print(table)
-        else:
-            print("Tidak ada data 'Daftar_paket' dalam file JSON.")
-    else:
-        print("Tidak ada data 'Daftar_paket' dalam file JSON.")
-
+        print(table)
+    else:print('Data Kosong')
 
 # Fungsi menu pelanggan
-def menu_pelanggan():
-    data = load_data()  # Memuat data pelanggan
-    if data is None:
-        return
-
-    Daftar_paket = load()  # Memuat data Daftar_paket
-    if Daftar_paket is None:
-        return
-
+def menu_pelanggan(user_role):
+    data = load_data()
+    
     while True:
         print(Fore.MAGENTA + "\n== 🛒 Menu Pelanggan 🛒 ==")
         print(Fore.CYAN + "1. 📦 Lihat daftar paket")
@@ -118,163 +91,62 @@ def menu_pelanggan():
         if pilihan == "1":
             daftar_paket(data)
         elif pilihan == "2":
-            Daftar_paket = (
-                load()
-            )  # Menginisialisasi variabel Daftar_paket dengan data dari file JSON
-            if Daftar_paket is None:
-                return
-                while True:
-                    # Memproses pembelian paket
-                    nomor_paket = int(
-                        input("Masukkan nomor paket yang ingin Anda beli: ")
-                    )
+            daftar_paket(data)
+            for i in data['Daftar_paket']:
+                pilih = int(input("Masukan Pilihan : "))
+                if i['Nomor'] == pilih:
+                    print(i['Deskripsi'])
+        # elif pilihan == "3":
+        #     # Melakukan top up saldo e-money
+        #     jumlah_topup = int(
+        #         input(
+        #             "Masukkan jumlah top up saldo e-money (minimal 30.000, maksimal 500.000): "
+        #         )
+        #     )
+        #     if 30000 <= jumlah_topup <= 500000:
+        #         pelanggan["saldo_e_money"] += jumlah_topup
+        #         print(
+        #             f"Saldo e-money Anda sekarang: Rp. {pelanggan['saldo_e_money']}")
+        #     else:
+        #         print("Jumlah top up tidak valid. Minimal 30.000, maksimal 500.000.")
+        # elif pilihan == "4":
+        #     # Mendaftar sebagai anggota
+        #     if "membership_id" in pelanggan and pelanggan["membership_id"] == "":
+        #         print("Pilih Jenis Keanggotaan:")
+        #         print("1. Platinum")
+        #         print("2. Gold")
+        #         jenis_anggota = input("Masukkan angka 1 atau 2: ")
 
-                    # Gunakan loop untuk mencari paket yang sesuai
-                    selected_package = None
-                    for paket in Daftar_paket:
-                        if paket["Nomor"] == nomor_paket:
-                            selected_package = paket
-                            break  # Keluar dari loop setelah menemukan paket yang sesuai
+        #         if jenis_anggota == "1":
+        #             prefix = "A"  # Platinum
+        #             biaya_daftar = 200000
+        #         elif jenis_anggota == "2":
+        #             prefix = "S"  # Gold
+        #             biaya_daftar = 100000
+        #         else:
+        #             print("Pilihan jenis anggota tidak valid.")
+        #             continue
 
-                if selected_package:
-                    customer_access = selected_package["akses"]
-                    if customer_access == "Plat_member":
-                        if int(selected_package["stock"]) > 0 and pelanggan[
-                            "saldo_e_money"
-                        ] >= int(
-                            selected_package["Harga"]
-                            .replace("Rp. ", "")
-                            .replace(".", "")
-                        ):
-                            print("Paket berhasil dibeli.")
-                            pelanggan["saldo_e_money"] -= int(
-                                selected_package["Harga"]
-                                .replace("Rp. ", "")
-                                .replace(".", "")
-                            )
-                            selected_package["stock"] = str(
-                                int(selected_package["stock"]) - 1
-                            )  # Kurangi stok
-                        else:
-                            print(
-                                "Saldo e-money Anda tidak mencukupi atau paket tidak tersedia."
-                            )
-                    elif customer_access == "Gold_member":
-                        if selected_package["akses"] == "Plat_member":
-                            print(
-                                "Anda adalah Gold_member, Anda tidak bisa membeli paket Plat_member."
-                            )
-                        else:
-                            if int(selected_package["stock"]) > 0 and pelanggan[
-                                "saldo_e_money"
-                            ] >= int(
-                                selected_package["Harga"]
-                                .replace("Rp. ", "")
-                                .replace(".", "")
-                            ):
-                                print("Paket berhasil dibeli.")
-                                pelanggan["saldo_e_money"] -= int(
-                                    selected_package["Harga"]
-                                    .replace("Rp. ", "")
-                                    .replace(".", "")
-                                )
-                                selected_package["stock"] = str(
-                                    int(selected_package["stock"]) - 1
-                                )  # Kurangi stok
-                            else:
-                                print(
-                                    "Saldo e-money Anda tidak mencukupi atau paket tidak tersedia."
-                                )
-                    elif customer_access == "Reguler":
-                        if (
-                            selected_package["akses"] == "Plat_member"
-                            or selected_package["akses"] == "Gold_member"
-                        ):
-                            print(
-                                "Anda adalah Reguler, Anda tidak bisa membeli paket Plat_member atau Gold_member."
-                            )
-                        else:
-                            if (
-                                selected_package["stock"] == "Tidak terbatas"
-                                or (int(selected_package["stock"])) > 0
-                                and pelanggan["saldo_e_money"]
-                                >= int(
-                                    selected_package["Harga"]
-                                    .replace("Rp. ", "")
-                                    .replace(".", "")
-                                )
-                            ):
-                                print("Paket berhasil dibeli.")
-                                if selected_package["stock"] != "Tidak terbatas":
-                                    pelanggan["saldo_e_money"] -= int(
-                                        selected_package["Harga"]
-                                        .replace("Rp. ", "")
-                                        .replace(".", "")
-                                    )
-                                    selected_package["stock"] = str(
-                                        int(selected_package["stock"]) - 1
-                                    )  # Kurangi stok
-                            else:
-                                print(
-                                    "Saldo e-money Anda tidak mencukupi atau paket tidak tersedia."
-                                )
-                else:
-                    print("Nomor paket tidak valid. Silakan coba lagi.")
+        #         if pelanggan["saldo_e_money"] >= biaya_daftar:
+        #             pelanggan["membership_id"] = generate_unique_membership_id(
+        #                 prefix)
+        #             pelanggan["saldo_e_money"] -= biaya_daftar
+        #             print("Anda telah menjadi anggota.")
+        #             print(f"Membership ID Anda: {pelanggan['membership_id']}")
 
-        elif pilihan == "3":
-            # Melakukan top up saldo e-money
-            jumlah_topup = int(
-                input(
-                    "Masukkan jumlah top up saldo e-money (minimal 30.000, maksimal 500.000): "
-                )
-            )
-            if 30000 <= jumlah_topup <= 500000:
-                pelanggan["saldo_e_money"] += jumlah_topup
-                print(
-                    f"Saldo e-money Anda sekarang: Rp. {pelanggan['saldo_e_money']}")
-            else:
-                print("Jumlah top up tidak valid. Minimal 30.000, maksimal 500.000.")
-        elif pilihan == "4":
-            # Mendaftar sebagai anggota
-            if "membership_id" in pelanggan and pelanggan["membership_id"] == "":
-                print("Pilih Jenis Keanggotaan:")
-                print("1. Platinum")
-                print("2. Gold")
-                jenis_anggota = input("Masukkan angka 1 atau 2: ")
+        #             # Menyimpan data setelah perubahan
+        #             save_data(data)
+        #         else:
+        #             print(
+        #                 "Saldo e-money Anda tidak mencukupi untuk mendaftar sebagai anggota."
+        #             )
+        #     else:
+        #         print("Anda sudah menjadi anggota atau belum login.")
 
-                if jenis_anggota == "1":
-                    prefix = "A"  # Platinum
-                    biaya_daftar = 200000
-                elif jenis_anggota == "2":
-                    prefix = "S"  # Gold
-                    biaya_daftar = 100000
-                else:
-                    print("Pilihan jenis anggota tidak valid.")
-                    continue
-
-                if pelanggan["saldo_e_money"] >= biaya_daftar:
-                    pelanggan["membership_id"] = generate_unique_membership_id(
-                        prefix)
-                    pelanggan["saldo_e_money"] -= biaya_daftar
-                    print("Anda telah menjadi anggota.")
-                    print(f"Membership ID Anda: {pelanggan['membership_id']}")
-
-                    # Menyimpan data setelah perubahan
-                    save_data(data)
-                else:
-                    print(
-                        "Saldo e-money Anda tidak mencukupi untuk mendaftar sebagai anggota."
-                    )
-            else:
-                print("Anda sudah menjadi anggota atau belum login.")
-
-        elif pilihan == "5":
-            print("Terima kasih! Sampai jumpa.")
-            break
+        # elif pilihan == "5":
+        #     print("Terima kasih! Sampai jumpa.")
+        #     break
 
         else:
             print("Pilihan tidak valid. Silakan pilih kembali.")
 
-
-if __name__ == "__main__":
-    menu_pelanggan()
