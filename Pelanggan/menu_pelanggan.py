@@ -92,10 +92,12 @@ def menu_pelanggan(user_role):
             daftar_paket(data)
         elif pilihan == "2":
             daftar_paket(data)
+            pilih = int(input("Masukan Pilihan : "))
             for i in data['Daftar_paket']:
-                pilih = int(input("Masukan Pilihan : "))
-                if i['Nomor'] == pilih:
-                    print(i['Deskripsi'])
+                # if i['membership_id'] == True
+                if i['Nomor'] == pilih :
+                    print(f"Anda Membeli Paket: {i['Deskripsi']}\nDengan Harga {i['Harga']}" )
+                    
         # elif pilihan == "3":
         #     # Melakukan top up saldo e-money
         #     jumlah_topup = int(
