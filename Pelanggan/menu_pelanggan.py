@@ -64,20 +64,6 @@ def generate_unique_membership_id(prefix):
         string.ascii_uppercase + string.digits, k=6))
     return prefix + unique_id
 
-<<<<<<< HEAD
-def daftar_paket(data):
-    table = PrettyTable()
-    table.field_names = list(data['Daftar_paket'][0].keys())
-
-    for paket in data['Daftar_paket']:
-        table.add_row(list(paket.values()))
-
-    print(table)
-
-# Fungsi menu pelanggan
-def menu_pelanggan(user_role):
-    data = load_data()
-=======
 
 def show_available_packages(Daftar_paket, membership_id):
     if "Daftar_paket" in Daftar_paket:
@@ -113,7 +99,6 @@ def show_available_packages(Daftar_paket, membership_id):
 # Fungsi menu pelanggan
 def menu_pelanggan():
     data = load_data()  # Memuat data pelanggan
->>>>>>> 70d450b8aad1e0ae4ff975d8db1a29a42a2ad7f2
     if data is None:
         return
 
@@ -131,12 +116,7 @@ def menu_pelanggan():
         pilihan = input(Fore.WHITE + "👉 Masukkan pilihan (1-5): ")
 
         if pilihan == "1":
-<<<<<<< HEAD
             daftar_paket(data)
-=======
-            membership_id = data.get("membership_id", "")
-            show_available_packages(Daftar_paket, membership_id)
->>>>>>> 70d450b8aad1e0ae4ff975d8db1a29a42a2ad7f2
         elif pilihan == "2":
             Daftar_paket = (
                 load()
