@@ -8,6 +8,54 @@ init(autoreset=True)
 
 init(autoreset=True)
 
+"""
+
+    ROOT_DIR untuk mengatur path dari folder paling awal agar path dinamis dan menghindari error
+
+"""
+ROOT_DIR = os.path.abspath(os.curdir)
+
+
+# Fungsi untuk login
+def login(username_or_email, password):
+    data = load_data()
+    global session
+    for user in data["pelanggan"]:
+        if (user["username"] == username_or_email or user["email"] == username_or_email) and user["password"] == password:
+            session = user
+            print("Login berhasil sebagai pelanggan.")
+            import Pelanggan.menu_pelanggan as Pelanggan
+            Pelanggan.menu_pelanggan(session)
+            print(session)
+            return
+
+    if (data["admin"]["username"] == username_or_email or data["admin"]["email"] == username_or_email) and data["admin"]["password"] == password:
+        session = data["admin"]
+        print("Login berhasil sebagai admin.")
+    else:
+        print("Login gagal. Periksa kembali username/email dan password.")
+
+
+# Fungsi untuk registrasi
+def register(username, email, password):
+    data = load_data()
+    for user in data["pelanggan"]:
+        if user["username"] == username or user["email"] == email:
+            print("Username or email sudah terdaftar. Silakan gunakan yang lain.")
+            return
+        else:
+            new_user = {
+                "username": username,
+                "email": email,
+                "password": password,
+                "membership_id": False,
+                "Saldo E-money": 0
+            }
+            data["pelanggan"].append(new_user)
+            with open(f"{ROOT_DIR}/dataset/LoginData.json", 'w') as file:
+                json.dump(data, file, indent=4)
+            print("Registrasi berhasil.")
+
 
 def is_valid_membership_id(membership_id):
     # Mengecek apakah membership_id memenuhi semua ketentuan
@@ -21,12 +69,6 @@ def clear():
 
 
 def load_data():
-    """
-
-    ROOT_DIR untuk mengatur path dari folder paling awal agar path dinamis dan menghindari error
-
-    """
-    ROOT_DIR = os.path.abspath(os.curdir)
     try:
         with open(f"{ROOT_DIR}/dataset/LoginData.json", "r") as file:
             data = json.load(file)
@@ -47,8 +89,8 @@ def main():
 
         masukkan = input(Fore.WHITE + "Masukkan input: ")
 
+        pengguna = load_data()
         if masukkan == "1":
-            pengguna = load_data()
             while True:
                 username_or_email = input("Masukkan username atau email: ")
                 password = pwinput.pwinput(prompt="Masukkan password: ")
@@ -60,9 +102,7 @@ def main():
                     print("Login sukses.")
                     clear()
                     import Admin.crud as admin
-
                     admin.menu()
-
                     break
                 else:
                     clear()
@@ -70,70 +110,15 @@ def main():
 
         elif masukkan == "2":
             pengguna = load_data()
-            while True:
-                username_or_email = input("Masukkan username atau email: ")
-                password = pwinput.pwinput(prompt="Masukkan password: ")
-
-                for pelanggan in pengguna["pelanggan"]:
-                    if (
-                        pelanggan["username"] == username_or_email
-                        or pelanggan["email"] == username_or_email
-                    ) and pelanggan["password"] == password:
-                        print("Login sukses.")
-
-                        membership_choice = input("Apakah Anda memiliki membership? (ya/tidak): ")
-
-                        if membership_choice.lower() == "ya":
-                            if "membership_id" in pelanggan:
-                                membership_id = input("Masukkan membership ID Anda: ")
-                                if membership_id == pelanggan["membership_id"]:
-                                    print("Login sukses sebagai pelanggan dengan membership.")
-                                    import Pelanggan.menu_pelanggan as pelanggan
-                                    pelanggan.menu_pelanggan()
-                                    clear()
-                                else:
-                                    print("Membership ID salah. Silakan coba lagi.")
-                                    clear()
-                            else:
-                                print("Anda tidak memiliki membership. Silakan coba lagi.")
-                                clear()
-                        break
-                else:
-                    print("Login gagal. Silakan coba lagi.")
-                    clear()
-                    
+            username_or_email = input("Masukkan username atau email: ")
+            password = pwinput.pwinput(prompt="Masukkan password: ")
+            login(username_or_email,password)
         elif masukkan == "3":
-            pengguna = load_data()
             while True:
                 username = input("Masukkan username: ")
                 email = input("Masukkan email: ")
                 password = pwinput.pwinput(prompt="Masukkan password: ")
-                is_member = input("Apakah anda member? (ya/tidak): ")
-                if is_member.lower() == "ya":
-                    membership_id = input("Masukkan membership ID: ")
-                    if is_valid_membership_id(membership_id):
-                        break
-                    else:
-                        print(
-                            "Membership ID tidak valid. Pastikan ID memiliki 6 digit."
-                        )
-                    pengguna_baru = {
-                        "username": username,
-                        "email": email,
-                        "password": password,
-                        "membership_id": membership_id,
-                    }
-                else:
-                    pengguna_baru = {
-                        "username": username,
-                        "email": email,
-                        "password": password,
-                    }
-                pengguna["pelanggan"].append(pengguna_baru)
-                with open("LoginData.json", "w") as file:
-                    json.dump(pengguna, file, indent=4)
-                print("Registrasi sukses!")
-
+                register(username,email,password)
                 # Keluar dari menu registrasi
                 keluar = input("Ingin keluar? (ya/tidak): ")
                 if keluar.lower() == "ya":

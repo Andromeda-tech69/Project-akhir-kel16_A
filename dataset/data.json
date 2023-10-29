@@ -2,50 +2,50 @@
   "Daftar_paket": [
     {
       "Nomor": 1,
-      "Deskripsi": "Paket Unlimited Spesial Platinum member",
+      "Deskripsi": "Paket Unlimited Spesial Platinum Member",
       "jenis": "Paket Bulanan",
-      "akses": "Plat_member",
-      "Harga": "Rp. 350.000",
-      "stock": "5"
+      "akses": "Member",
+      "Harga": 350000,
+      "stock": 5
     },
     {
       "Nomor": 2,
-      "Deskripsi": "Paket 250GB Spesial Platinum member",
+      "Deskripsi": "Paket 250GB Spesial Platinum Member",
       "jenis": "Paket Bulanan",
-      "akses": "Plat_member",
-      "Harga": "Rp. 250.000",
-      "stock": "10"
+      "akses": "Member",
+      "Harga": 250000,
+      "stock": 100
     },
     {
       "Nomor": 3,
-      "Deskripsi": "Paket WOW 75GB spesial Gold member",
+      "Deskripsi": "Paket WOW 75GB spesial Gold Member",
       "jenis": "Paket Bulanan",
-      "akses": "Gold_member",
-      "Harga": "Rp. 100.000",
-      "stock": "100"
+      "akses": "Member",
+      "Harga": 100000,
+      "stock": 100
     },
     {
       "Nomor": 4,
-      "Deskripsi": "Paket Spesial 60GB Gold member",
+      "Deskripsi": "Paket Spesial 60GB Gold Member",
       "jenis": "Paket Bulanan",
-      "akses": "Plat_member",
-      "Harga": "Rp. 75.000",
-      "stock": "100"
+      "akses": "Member",
+      "Harga": 75000,
+      "stock": 100
     },
     {
       "Nomor": 5,
       "Deskripsi": "Paket Spesial 50GB Reguler",
       "jenis": "Paket Bulanan",
       "akses": "Reguler",
-      "Harga": "Rp. 100.000",
-      "stock": "Tidak terbatas"
+      "Harga": 100000,
+      "stock": 100
     },
     {
       "Nomor": 6,
       "Deskripsi": "Paket DUAR 30GB Reguler",
       "jenis": "Paket Bulanan",
       "akses": "Reguler",
-      "Harga": "Rp. 50.000",
+      "Harga": 50000,
       "stock": "Tidak terbatas"
     },
     {
@@ -53,7 +53,7 @@
       "Deskripsi": "Paket Hemat 13GB",
       "jenis": "Paket Bulanan",
       "akses": "Reguler",
-      "Harga": "Rp. 35.000",
+      "Harga": 35000,
       "stock": "Tidak terbatas"
     },
     {
@@ -61,7 +61,7 @@
       "Deskripsi": "Paket 25GB",
       "jenis": "Paket Mingguan",
       "akses": "Reguler",
-      "Harga": "Rp. 45.000",
+      "Harga": 45000,
       "stock": "Tidak terbatas"
     },
     {
@@ -69,7 +69,7 @@
       "Deskripsi": "Paket 15GB",
       "jenis": "Paket Mingguan",
       "akses": "Reguler",
-      "Harga": "Rp. 30.000",
+      "Harga": 30000,
       "stock": "Tidak terbatas"
     }
   ]
