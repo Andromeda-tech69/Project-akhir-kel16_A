@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "Daftar_paket": [
         {
             "Nomor": 1,
@@ -74,80 +73,4 @@
             "stock": 967
         }
     ]
-=======
-  "Daftar_paket": [
-    {
-      "Nomor": 1,
-      "Deskripsi": "Paket Unlimited Spesial Membership",
-      "jenis": "Paket Bulanan",
-      "membership": true,
-      "Harga": 350000,
-      "stock": 5
-    },
-    {
-      "Nomor": 2,
-      "Deskripsi": "Paket 250GB Spesial Membership",
-      "jenis": "Paket Bulanan",
-      "membership": true,
-      "Harga": 250000,
-      "stock": 3
-    },
-    {
-      "Nomor": 3,
-      "Deskripsi": "Paket WOW 75GB spesial Membership",
-      "jenis": "Paket Bulanan",
-      "membership": true,
-      "Harga": 100000,
-      "stock": 6
-    },
-    {
-      "Nomor": 4,
-      "Deskripsi": "Paket Spesial 60GB Membership",
-      "jenis": "Paket Bulanan",
-      "membership": true,
-      "Harga": 75000,
-      "stock": 4
-    },
-    {
-      "Nomor": 5,
-      "Deskripsi": "Paket Spesial 50GB Reguler",
-      "jenis": "Paket Bulanan",
-      "membership": false,
-      "Harga": 100000,
-      "stock": 100
-    },
-    {
-      "Nomor": 6,
-      "Deskripsi": "Paket DUAR 30GB Reguler",
-      "jenis": "Paket Bulanan",
-      "membership": false,
-      "Harga": 50000,
-      "stock": 9999999
-    },
-    {
-      "Nomor": 7,
-      "Deskripsi": "Paket Hemat 13GB",
-      "jenis": "Paket Bulanan",
-      "membership": false,
-      "Harga": 35000,
-      "stock": 9999999
-    },
-    {
-      "Nomor": 8,
-      "Deskripsi": "Paket 25GB",
-      "jenis": "Paket Mingguan",
-      "membership": false,
-      "Harga": 45000,
-      "stock": 9999999
-    },
-    {
-      "Nomor": 9,
-      "Deskripsi": "Paket 15GB",
-      "jenis": "Paket Mingguan",
-      "membership": false,
-      "Harga": 30000,
-      "stock": 9999999
-    }
-  ]
->>>>>>> 37beeb87246b460e8c86fe6174a46f7ab469fe98
 }
