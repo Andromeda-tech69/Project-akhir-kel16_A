@@ -1,4 +1,4 @@
-import os, json, time, random, string
+import os, json, time
 from prettytable import PrettyTable
 from colorama import Fore, Back, Style, init
 from datetime import datetime
@@ -181,7 +181,6 @@ def menu_pelanggan(user_role):
             else:
                 print("Anda bukan member.")
             beli_barang(user_role['username'],is_membership)
-
         elif pilihan == "3":
             top_up(user_role['username'])
         elif pilihan == "4":
@@ -190,4 +189,3 @@ def menu_pelanggan(user_role):
 
         else:
             print("Pilihan tidak valid. Silakan pilih kembali.")
-

@@ -30,7 +30,7 @@
             "jenis": "Paket Bulanan",
             "membership": true,
             "Harga": 75000,
-            "stock": 100
+            "stock": 99
         },
         {
             "Nomor": 5,
@@ -70,7 +70,7 @@
             "jenis": "Paket Mingguan",
             "membership": false,
             "Harga": 30000,
-            "stock": 967
+            "stock": 966
         }
     ]
 }

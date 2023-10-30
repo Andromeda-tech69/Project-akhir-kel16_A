@@ -5,7 +5,6 @@ from colorama import Fore, Back, Style, init
 # Inisialisasi Colorama
 init(autoreset=True)
 
-
 # Path Awal
 ROOT_DIR = os.path.abspath(os.curdir)
 
@@ -14,10 +13,7 @@ def clear():
     os.system("cls")
     time.sleep(1)
 
-
 # Fungsi untuk membaca data dari file JSON
-
-
 def load():
     try:
         with open(f"{ROOT_DIR}/dataset/data.json", "r") as file:
