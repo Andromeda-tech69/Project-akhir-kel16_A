@@ -10,41 +10,35 @@
             "email": "fafa@gmail.com",
             "password": "fafa",
             "membership_id": true,
-            "Saldo E-money": "300000"
+            "Saldo E-money": 210000
         },
         {
             "username": "a",
             "password": "a",
+            "email": "a",
             "membership_id": true,
-            "Saldo E-money": "250000"
+            "Saldo E-money": 200000
         },
         {
             "username": "Hibnu",
             "email": "HibnuAS@gmail.com",
             "password": "Loc2341",
-            "membership_id": false,
-            "Saldo E-money": "30000"
+            "membership_id": true,
+            "Saldo E-money": 0
         },
         {
             "username": "Andromeda",
             "email": "Andromeda@gmail.com",
             "password": "Andromeda2342",
             "membership_id": false,
-            "Saldo E-money": "100000"
+            "Saldo E-money": 20000
         },
         {
             "username": "test",
             "email": "test",
             "password": "test",
-            "membership_id": false,
-            "Saldo E-money": 0
-        },
-        {
-            "username": "a",
-            "email": "a",
-            "password": "a",
-            "membership_id": false,
-            "Saldo E-money": 0
+            "membership_id": true,
+            "Saldo E-money": 15000
         }
     ]
 }

@@ -39,14 +39,14 @@ import Login.login as login
 
 if __name__ == "__main__":
     while True:
-        try:
+        # try:
             login.main()
         # except Exception as e:
         #     print(e)
-        except KeyboardInterrupt:
-            os.system("cls")
-            print("\nKeyboard Interrupt")
-            for i in range(3, 0, -1):
-                time.sleep(1)
-                print("Auto Logout In", i)
-            continue
+        # except KeyboardInterrupt:
+        #     os.system("cls")
+        #     print("\nKeyboard Interrupt")
+        #     for i in range(3, 0, -1):
+        #         time.sleep(1)
+        #         print("Auto Logout In", i)
+        #     continue

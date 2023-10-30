@@ -26,7 +26,6 @@ def login(username_or_email, password):
             print("Login berhasil sebagai pelanggan.")
             import Pelanggan.menu_pelanggan as Pelanggan
             Pelanggan.menu_pelanggan(session)
-            print(session)
             return
 
     if (data["admin"]["username"] == username_or_email or data["admin"]["email"] == username_or_email) and data["admin"]["password"] == password:
