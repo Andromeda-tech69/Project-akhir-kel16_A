@@ -30,7 +30,7 @@
             "jenis": "Paket Bulanan",
             "membership": true,
             "Harga": 75000,
-            "stock": 99
+            "stock": 100
         },
         {
             "Nomor": 5,
@@ -66,11 +66,12 @@
         },
         {
             "Nomor": 9,
-            "Deskripsi": "Paket 15GB",
-            "jenis": "Paket Mingguan",
+            "Deskripsi": "paket 10 gb",
+            "jenis": "paket mingguan",
             "membership": false,
-            "Harga": 30000,
-            "stock": 966
+            "Harga": 25000,
+            "stock": 567,
+            "akses": "true"
         }
     ]
 }
