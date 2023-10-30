@@ -30,7 +30,7 @@
             "username": "Andromeda",
             "email": "Andromeda@gmail.com",
             "password": "Andromeda2342",
-            "membership_id": false,
+            "membership_id": true,
             "Saldo E-money": 20000
         },
         {
