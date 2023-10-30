@@ -6,7 +6,7 @@
       "jenis": "Paket Bulanan",
       "membership": true,
       "Harga": 350000,
-      "stock": 4
+      "stock": 5
     },
     {
       "Nomor": 2,
@@ -30,7 +30,7 @@
       "jenis": "Paket Bulanan",
       "membership": true,
       "Harga": 75000,
-      "stock": 100
+      "stock": 99
     },
     {
       "Nomor": 5,
@@ -54,16 +54,31 @@
       "jenis": "Paket Bulanan",
       "membership": false,
       "Harga": 25000,
-      "stock": 998
+      "stock": 999
     },
     {
       "Nomor": 8,
-      "Deskripsi": "paket 15gb",
-      "jenis": "paket mingguan",
+      "Deskripsi": "Paket 25GB",
+      "jenis": "Paket Mingguan",
       "membership": false,
-      "Harga": 25000,
-      "stock": 45,
-      "akses": "true"
+      "Harga": 45000,
+      "stock": 1000
+    },
+    {
+      "Nomor": 9,
+      "Deskripsi": "Paket 15GB",
+      "jenis": "Paket Mingguan",
+      "membership": false,
+      "Harga": 30000,
+      "stock": 966
+    },
+    {
+      "Nomor": 10,
+      "Deskripsi": "Paket Darurat gawat 5 GB",
+      "jenis": "Paket 1 Hari",
+      "akses": "True",
+      "Harga": 3600,
+      "stock": 999
     }
   ]
 }

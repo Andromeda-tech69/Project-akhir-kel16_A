@@ -20,11 +20,10 @@ Proyek ini adalah bagian dari praktikum Sistem Layanan Internet dan bertujuan un
 
 - [ ] Pelanggan :  
             
-            
+            - Fitur 1: Read Data.
+            - Fitur 2: Buy Item.
+            - Fitur 3: Top Up.
 
-<<<<<<< HEAD
-## Penjelasan Detail
-=======
 ### Penjelasan Detail
 
 #### **ADMIN**
@@ -63,4 +62,3 @@ Proyek ini adalah bagian dari praktikum Sistem Layanan Internet dan bertujuan un
 
 ### Flowchart
 
->>>>>>> b7bda93fac1f0a301752542161555918dbdc6dbb

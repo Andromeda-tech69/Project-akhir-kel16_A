@@ -6,11 +6,18 @@
     },
     "pelanggan": [
         {
-            "username": "Andromeda",
-            "email": "Andromeda@gmail.com",
-            "password": "Andromeda2342",
-            "membership_id": false,
-            "Saldo E-money": 20000
+            "username": "fafa",
+            "email": "fafa@gmail.com",
+            "password": "fafa",
+            "membership_id": true,
+            "Saldo E-money": 210000
+        },
+        {
+            "username": "a",
+            "password": "a",
+            "email": "a",
+            "membership_id": true,
+            "Saldo E-money": 95000
         },
         {
             "username": "Hibnu",
@@ -20,18 +27,11 @@
             "Saldo E-money": 0
         },
         {
-            "username": "a",
-            "password": "a",
-            "email": "a",
-            "membership_id": true,
-            "Saldo E-money": 525000
-        },
-        {
-            "username": "fafa",
-            "email": "fafa@gmail.com",
-            "password": "fafa",
-            "membership_id": true,
-            "Saldo E-money": 210000
+            "username": "Andromeda",
+            "email": "Andromeda@gmail.com",
+            "password": "Andromeda2342",
+            "membership_id": false,
+            "Saldo E-money": 20000
         },
         {
             "username": "test",
