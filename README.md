@@ -61,3 +61,5 @@ Proyek ini adalah bagian dari praktikum Sistem Layanan Internet dan bertujuan un
 - Penggunaan pesan kesalahan yang jelas dan pengalihan ke layanan dukungan penting untuk memastikan pengalaman pengguna yang baik.
 - 
 ### Flowchart
+
+![WhatsApp Image 2023-10-30 at 22 32 39](https://github.com/Andromeda-tech69/Project-akhir-kel16_A/assets/144808847/fb4fe57d-61e2-450c-bd1f-0b4c1ed864d4)
