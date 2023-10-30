@@ -158,34 +158,38 @@ def beli_barang(username,is_membership):
 # Fungsi menu pelanggan
 def menu_pelanggan(user_role):
     while True:
-        data = load()
-        userData = loadLogin()
-        print(Fore.MAGENTA + "\n== 🛒 Menu Pelanggan 🛒 ==")
-        print(Fore.CYAN + "1. 📦 Lihat daftar paket")
-        print(Fore.GREEN + "2. 🛍️ Beli paket")
-        print(Fore.BLUE + "3. 💰 Top up saldo e-money")
-        print(Fore.MAGENTA + "4. 🚪 Logout")
-        pilihan = input(Fore.WHITE + "👉 Masukkan pilihan (1-5): ")
+        try:
+            data = load()
+            userData = loadLogin()
+            print(Fore.MAGENTA + "\n== 🛒 Menu Pelanggan 🛒 ==")
+            print(Fore.CYAN + "1. 📦 Lihat daftar paket")
+            print(Fore.GREEN + "2. 🛍️ Beli paket")
+            print(Fore.BLUE + "3. 💰 Top up saldo e-money")
+            print(Fore.MAGENTA + "4. 🚪 Logout")
+            pilihan = input(Fore.WHITE + "👉 Masukkan pilihan (1-5): ")
 
-        if pilihan == "1":
-            daftar_paket(data)
-        elif pilihan == "2":
-            daftar_paket(data)
-            is_membership = False
-            for user in userData['pelanggan']:
-                if user['username'] == user_role['username']:
-                    is_membership = user.get('membership_id', False)
-                    break
-            if is_membership:
-                print("Anda adalah member.")
+            if pilihan == "1":
+                daftar_paket(data)
+            elif pilihan == "2":
+                daftar_paket(data)
+                is_membership = False
+                for user in userData['pelanggan']:
+                    if user['username'] == user_role['username']:
+                        is_membership = user.get('membership_id', False)
+                        break
+                if is_membership:
+                    print("Anda adalah member.")
+                else:
+                    print("Anda bukan member.")
+                beli_barang(user_role['username'],is_membership)
+            elif pilihan == "3":
+                top_up(user_role['username'])
+            elif pilihan == "4":
+                print("Terima kasih! Sampai jumpa.")
+                break
+
             else:
-                print("Anda bukan member.")
-            beli_barang(user_role['username'],is_membership)
-        elif pilihan == "3":
-            top_up(user_role['username'])
-        elif pilihan == "4":
-            print("Terima kasih! Sampai jumpa.")
-            break
-
-        else:
-            print("Pilihan tidak valid. Silakan pilih kembali.")
+                print("Pilihan tidak valid. Silakan pilih kembali.")
+        except KeyboardInterrupt:
+            print("\n" + Fore.YELLOW + "⚠ KeyboardInterrupt")
+            continue
