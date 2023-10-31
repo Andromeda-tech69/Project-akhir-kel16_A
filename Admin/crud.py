@@ -60,7 +60,7 @@ def create_data(data):
                 "Nomor": len(data["Daftar_paket"]) + 1,
                 "Deskripsi": str(input("Masukkan Deskripsi: ")),
                 "jenis": str(input("Masukkan jenis: ")),
-                "akses": str(input("Masukkan akses: ")),
+                "membership": str(input("Masukkan Membership: ")),
                 "Harga": int(input("Masukkan harga: ")),
                 "stock": int(input("Masukkan jumblah stok :")),
             }
