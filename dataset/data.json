@@ -74,10 +74,10 @@
     },
     {
       "Nomor": 10,
-      "Deskripsi": "Paket Darurat gawat 5 GB",
-      "jenis": "Paket 1 Hari",
-      "akses": "True",
-      "Harga": 3600,
+      "Deskripsi": "paket darurat gawat 5gb",
+      "jenis": "paket 1 hari",
+      "akses": "false",
+      "Harga": 3500,
       "stock": 999
     }
   ]
