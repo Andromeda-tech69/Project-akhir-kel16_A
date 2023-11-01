@@ -87,7 +87,7 @@ def update_data(data):
             while True:
                 entry["Deskripsi"] = input("Masukkan Deskripsi baru: ").lower()
                 entry["jenis"] = input("Masukkan jenis baru: ").lower()
-                entry["akses"] = input("Masukkan akses baru: ").lower()
+                entry["membership"] = input("Masukkan akses baru: ").lower()
                 while True:
                     try:
                         entry["Harga"] = int(input("Masukkan harga baru: "))
@@ -98,7 +98,7 @@ def update_data(data):
                 save_data(data)
                 print("Data berhasil diubah.")
                 return
-    print("Nomor kamar tidak ditemukan.")
+    print("Nomor paket tidak ditemukan.")
 
 
 # Fungsi untuk menghapus data

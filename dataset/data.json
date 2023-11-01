@@ -6,7 +6,7 @@
       "jenis": "Paket Bulanan",
       "membership": true,
       "Harga": 350000,
-      "stock": 5
+      "stock": 4
     },
     {
       "Nomor": 2,
@@ -18,11 +18,11 @@
     },
     {
       "Nomor": 3,
-      "Deskripsi": "Paket WOW 75GB spesial Gold Member",
-      "jenis": "Paket Bulanan",
-      "membership": true,
-      "Harga": 100000,
-      "stock": 100
+      "Deskripsi": "asas",
+      "jenis": "daww",
+      "membership": "false",
+      "Harga": 2444,
+      "stock": 0
     },
     {
       "Nomor": 4,
@@ -39,14 +39,6 @@
       "membership": false,
       "Harga": 100000,
       "stock": 100
-    },
-    {
-      "Nomor": 6,
-      "Deskripsi": "Paket DUAR 30GB Reguler",
-      "jenis": "Paket Bulanan",
-      "membership": false,
-      "Harga": 50000,
-      "stock": 1000
     },
     {
       "Nomor": 7,
@@ -66,19 +58,27 @@
     },
     {
       "Nomor": 9,
-      "Deskripsi": "Paket 15GB",
-      "jenis": "Paket Mingguan",
-      "membership": false,
-      "Harga": 30000,
-      "stock": 966
+      "Deskripsi": "aaaa",
+      "jenis": "aaaa",
+      "membership": "aaaa",
+      "Harga": 255555,
+      "stock": -1
     },
     {
       "Nomor": 10,
-      "Deskripsi": "paket darurat gawat 5gb",
+      "Deskripsi": "pake darurat gawat 5gb revisi 1",
       "jenis": "paket 1 hari",
       "akses": "false",
-      "Harga": 3500,
-      "stock": 999
+      "Harga": 30000,
+      "stock": 254
+    },
+    {
+      "Nomor": 11,
+      "Deskripsi": "Paket test 111",
+      "jenis": "Paket bulanan",
+      "membership": "True",
+      "Harga": 15000,
+      "stock": 34
     }
   ]
 }
