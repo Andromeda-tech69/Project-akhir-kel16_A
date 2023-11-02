@@ -50,6 +50,11 @@ def read_data(data):
 
     print(table)
 
+def update_entry_numbers(data):
+    # Fungsi ini akan memperbarui nomor pada semua entri berdasarkan urutan mereka
+    for i, entry in enumerate(data["Daftar_paket"], start=1):
+        entry["Nomor"] = i
+
 
 # Fungsi untuk menambahkan data baru
 def create_data(data):
@@ -57,22 +62,27 @@ def create_data(data):
     while True:
         try:
             data_baru = {
-                "Nomor": len(data["Daftar_paket"]) + 1,
+                "Nomor":len(data["Daftar_paket"]) + 1,
                 "Deskripsi": str(input("Masukkan Deskripsi: ")),
                 "jenis": str(input("Masukkan jenis: ")),
-                "membership": str(input("Masukkan Membership: ")),
-                "Harga": int(input("Masukkan harga: ")),
-                "stock": int(input("Masukkan jumblah stok :")),
+                "membership": bool(input("Masukkan Membership: ")),
+                "Harga": 0,
+                "stock": 0,
             }
-            break
-        except:
-            print("Masukan Dengan Benar")
-            continue
-    data["Daftar_paket"].append(data_baru)
-    save_data(data)
-    print("Data berhasil ditambahkan.")
+            harga = int(input("Masukkan harga: "))
+            stock = int(input("Masukkan jumblah stok: "))
 
-
+            if harga < 0 or stock < 0:
+                print("Harga dan stok tidak boleh negatif. Silakan coba lagi.")
+            else:
+                data_baru["Harga"] = harga
+                data_baru["stock"] = stock
+                data["Daftar_paket"].append(data_baru)
+                save_data(data)
+                print("Data berhasil ditambahkan.")
+                break
+        except ValueError:
+            print("Masukan Dengan Benar (Harga dan Stok harus berupa angka bulat positif).")
 # Fungsi untuk mengubah data
 def update_data(data):
     read_data(data)
@@ -85,9 +95,9 @@ def update_data(data):
     for entry in data["Daftar_paket"]:
         if entry["Nomor"] == nomor:
             while True:
-                entry["Deskripsi"] = input("Masukkan Deskripsi baru: ").lower()
-                entry["jenis"] = input("Masukkan jenis baru: ").lower()
-                entry["membership"] = input("Masukkan akses baru: ").lower()
+                entry["Deskripsi"] = str(input("Masukkan Deskripsi baru: ")).lower()
+                entry["jenis"] = str(input("Masukkan jenis baru: ")).lower()
+                entry["membership"] = bool(input("Masukkan akses baru: ")).lower()
                 while True:
                     try:
                         entry["Harga"] = int(input("Masukkan harga baru: "))
@@ -108,16 +118,24 @@ def delete_data(data):
         try:
             nomor = int(input("Masukkan nomor paket yang ingin dihapus: "))
             break
-        except:
+        except ValueError:
             print("Masukan Dengan Benar")
+
+    found_entry = None
     for entry in data["Daftar_paket"]:
         if entry["Nomor"] == nomor:
+            found_entry = entry
             data["Daftar_paket"].remove(entry)
-            save_data(data)
-            print(f"Data nomor paket {nomor} berhasil dihapus.")
-            return
-    print("Nomor paket tidak ditemukan.")
+            break
 
+    if found_entry:
+        print(f"Data nomor paket {nomor} berhasil dihapus.")
+        update_entry_numbers(data)
+        # Mengurutkan data berdasarkan nomor paket setelah penghapusan
+        data["Daftar_paket"] = sorted(data["Daftar_paket"], key=lambda x: x["Nomor"])
+        save_data(data)
+    else:
+        print("Nomor paket tidak ditemukan.")
 
 def menu():
     # Program utama

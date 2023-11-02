@@ -18,14 +18,6 @@
     },
     {
       "Nomor": 3,
-      "Deskripsi": "asas",
-      "jenis": "daww",
-      "membership": "false",
-      "Harga": 2444,
-      "stock": 0
-    },
-    {
-      "Nomor": 4,
       "Deskripsi": "Paket Spesial 60GB Gold Member",
       "jenis": "Paket Bulanan",
       "membership": true,
@@ -33,7 +25,7 @@
       "stock": 99
     },
     {
-      "Nomor": 5,
+      "Nomor": 4,
       "Deskripsi": "Paket Spesial 50GB Reguler",
       "jenis": "Paket Bulanan",
       "membership": false,
@@ -41,7 +33,7 @@
       "stock": 100
     },
     {
-      "Nomor": 7,
+      "Nomor": 5,
       "Deskripsi": "Paket Hemat 13GB",
       "jenis": "Paket Bulanan",
       "membership": false,
@@ -49,36 +41,12 @@
       "stock": 999
     },
     {
-      "Nomor": 8,
+      "Nomor": 6,
       "Deskripsi": "Paket 25GB",
       "jenis": "Paket Mingguan",
       "membership": false,
       "Harga": 45000,
       "stock": 1000
-    },
-    {
-      "Nomor": 9,
-      "Deskripsi": "aaaa",
-      "jenis": "aaaa",
-      "membership": "aaaa",
-      "Harga": 255555,
-      "stock": -1
-    },
-    {
-      "Nomor": 10,
-      "Deskripsi": "pake darurat gawat 5gb revisi 1",
-      "jenis": "paket 1 hari",
-      "akses": "false",
-      "Harga": 30000,
-      "stock": 254
-    },
-    {
-      "Nomor": 11,
-      "Deskripsi": "Paket test 111",
-      "jenis": "Paket bulanan",
-      "membership": "True",
-      "Harga": 15000,
-      "stock": 34
     }
   ]
 }

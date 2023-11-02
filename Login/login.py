@@ -125,4 +125,5 @@ def main():
                     break
 
         elif masukkan == "4":
+            print("Terima kasih, sampai jumpa kembali.")
             raise SystemExit
