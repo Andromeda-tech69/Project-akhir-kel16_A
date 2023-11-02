@@ -2,30 +2,22 @@
   "Daftar_paket": [
     {
       "Nomor": 1,
-      "Deskripsi": "Paket Unlimited Spesial Platinum Member",
-      "jenis": "Paket Bulanan",
-      "membership": true,
-      "Harga": 350000,
-      "stock": 4
-    },
-    {
-      "Nomor": 2,
-      "Deskripsi": "Paket 250GB Spesial Platinum Member",
+      "Deskripsi": "Paket 250GB Spesial Member",
       "jenis": "Paket Bulanan",
       "membership": true,
       "Harga": 250000,
       "stock": 100
     },
     {
-      "Nomor": 3,
-      "Deskripsi": "Paket Spesial 60GB Gold Member",
+      "Nomor": 2,
+      "Deskripsi": "Paket Spesial 60GB Member",
       "jenis": "Paket Bulanan",
       "membership": true,
       "Harga": 75000,
       "stock": 99
     },
     {
-      "Nomor": 4,
+      "Nomor": 3,
       "Deskripsi": "Paket Spesial 50GB Reguler",
       "jenis": "Paket Bulanan",
       "membership": false,
@@ -33,20 +25,28 @@
       "stock": 100
     },
     {
-      "Nomor": 5,
-      "Deskripsi": "Paket Hemat 13GB",
+      "Nomor": 4,
+      "Deskripsi": "Paket Hemat 13GB reguler",
       "jenis": "Paket Bulanan",
       "membership": false,
       "Harga": 25000,
       "stock": 999
     },
     {
-      "Nomor": 6,
-      "Deskripsi": "Paket 25GB",
+      "Nomor": 5,
+      "Deskripsi": "Paket 25GB reguler",
       "jenis": "Paket Mingguan",
       "membership": false,
       "Harga": 45000,
       "stock": 1000
+    },
+    {
+      "Nomor": 6,
+      "Deskripsi": "Paket waw 40GB member",
+      "jenis": "Paket bulanan",
+      "membership": true,
+      "Harga": 160000,
+      "stock": 255
     }
   ]
 }

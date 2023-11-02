@@ -63,7 +63,15 @@ def daftar_paket(data):
     else:print('Data Kosong')
 
 def top_up(username):
-    saldo = int(input("Masukkan jumlah saldo yang ingin ditambahkan: "))
+    while True:
+        try:
+            saldo = int(input("Masukkan jumlah saldo yang ingin ditambahkan (minimal 30.000, maksimal 500.000): "))
+            if 30000 <= saldo <= 500000:
+                break
+            else:
+                print("Saldo harus antara 30.000 dan 500.000.")
+        except ValueError:
+            print("Masukkan harus berupa angka atau integer.")
 
     login_data = loadLogin()
 
@@ -74,6 +82,7 @@ def top_up(username):
             print(f"Saldo E-money berhasil ditambahkan. Saldo sekarang: {user['Saldo E-money']}")
 
     save_Login(login_data)
+
 
 # fungsi membeli barang dengan melakukan pencekan data apakah member atau bukan
 def beli_barang(username,is_membership):

@@ -97,7 +97,7 @@ def update_data(data):
             while True:
                 entry["Deskripsi"] = str(input("Masukkan Deskripsi baru: ")).lower()
                 entry["jenis"] = str(input("Masukkan jenis baru: ")).lower()
-                entry["membership"] = bool(input("Masukkan akses baru: ")).lower()
+                entry["membership"] = bool(input("Masukkan akses baru: "))
                 while True:
                     try:
                         entry["Harga"] = int(input("Masukkan harga baru: "))
