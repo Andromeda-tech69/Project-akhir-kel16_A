@@ -38,22 +38,27 @@ def login(username_or_email, password):
 # Fungsi untuk registrasi
 def register(username, email, password):
     data = load_data()
-    for user in data["pelanggan"]:
-        if user["username"] == username or user["email"] == email:
-            print("Username or email sudah terdaftar. Silakan gunakan yang lain.")
-            return
-        else:
-            new_user = {
-                "username": username,
-                "email": email,
-                "password": password,
-                "membership_id": False,
-                "Saldo E-money": 0
-            }
-            data["pelanggan"].append(new_user)
-            with open(f"{ROOT_DIR}/dataset/LoginData.json", 'w') as file:
-                json.dump(data, file, indent=4)
-            print("Registrasi berhasil.")
+    Usernames = [pelanggan['username'] for pelanggan in data['pelanggan']]
+    emails = [pelanggan['email'] for pelanggan in data['pelanggan']]
+        
+    if username in Usernames:
+        print(f"Username '{username}' sudah ada. Silakan pilih username lain.")
+        return False
+    elif email in emails:
+        print(f"Email '{email}' sudah terdaftar. Gunakan email lain.")
+        return False
+    else:
+        new_user = {
+            "username": username,
+            "email": email,
+            "password": password,
+            "membership_id": False,
+            "Saldo E-money": 0
+        }
+        data["pelanggan"].append(new_user)
+        with open(f"{ROOT_DIR}/dataset/LoginData.json", 'w') as file:
+            json.dump(data, file, indent=4)
+        print("Registrasi berhasil.")
 
 
 def is_valid_membership_id(membership_id):
@@ -118,12 +123,6 @@ def main():
                 email = input("Masukkan email: ")
                 password = pwinput.pwinput(prompt="Masukkan password: ")
                 register(username,email,password)
-                # Keluar dari menu registrasi
-                keluar = input("Ingin keluar? (ya/tidak): ")
-                if keluar.lower() == "ya":
-                    clear()
-                    break
-
         elif masukkan == "4":
             print("Terima kasih, sampai jumpa kembali.")
             raise SystemExit

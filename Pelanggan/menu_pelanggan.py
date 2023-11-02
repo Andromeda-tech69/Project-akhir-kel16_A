@@ -55,7 +55,8 @@ def daftar_paket(data):
     if data['Daftar_paket']:
         table = PrettyTable()
         table.field_names = list(data['Daftar_paket'][0].keys())
-
+        for item in data['Daftar_paket']:
+            item["membership"] = "Member" if item["membership"] else "Reguler"
         for paket in data['Daftar_paket']:
             table.add_row(list(paket.values()))
 

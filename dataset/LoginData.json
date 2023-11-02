@@ -23,7 +23,7 @@
             "username": "a",
             "password": "a",
             "email": "a",
-            "membership_id": true,
+            "membership_id": false,
             "Saldo E-money": 95000
         },
         {
@@ -41,37 +41,9 @@
             "Saldo E-money": 15000
         },
         {
-            "username": "aaaa",
-            "email": "",
-            "password": "1234",
-            "membership_id": false,
-            "Saldo E-money": 0
-        },
-        {
-            "username": "aaaa",
-            "email": "",
-            "password": "1234",
-            "membership_id": false,
-            "Saldo E-money": 0
-        },
-        {
-            "username": "aaaa",
-            "email": "",
-            "password": "1234",
-            "membership_id": false,
-            "Saldo E-money": 0
-        },
-        {
-            "username": "aaaa",
-            "email": "",
-            "password": "1234",
-            "membership_id": false,
-            "Saldo E-money": 0
-        },
-        {
-            "username": "aaaa",
-            "email": "",
-            "password": "1234",
+            "username": "b",
+            "email": "b",
+            "password": "b",
             "membership_id": false,
             "Saldo E-money": 0
         }

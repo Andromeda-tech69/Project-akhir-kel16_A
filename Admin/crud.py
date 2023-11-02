@@ -39,15 +39,13 @@ def read_data(data):
         print("Tidak ada data 'Daftar_paket' dalam file JSON.")
         return
 
-    table = PrettyTable()
-
-    # Mengambil nama kolom dari kunci (keys) JSON pertama
+    table = PrettyTable(data['Daftar_paket'][0].keys())
     field_names = Daftar_paket[0].keys()
     table.field_names = field_names
-
-    for entry in Daftar_paket:
-        table.add_row([entry.get(key, "") for key in field_names])
-
+    for item in data['Daftar_paket']:
+        item["membership"] = "Member" if item["membership"] else "Reguler"
+    for item in data['Daftar_paket']:
+        table.add_row(item.values())
     print(table)
 
 def update_entry_numbers(data):
