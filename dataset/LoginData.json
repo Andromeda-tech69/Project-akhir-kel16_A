@@ -23,15 +23,15 @@
             "username": "b",
             "email": "b",
             "password": "b",
-            "membership_id": false,
-            "Saldo E-money": 0
+            "membership_id": true,
+            "Saldo E-money": 250000
         },
         {
             "username": "fafa",
             "email": "fafa@gmail.com",
             "password": "fafa",
             "membership_id": true,
-            "Saldo E-money": 500000
+            "Saldo E-money": 400000
         }
     ]
 }
