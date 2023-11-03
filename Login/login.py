@@ -66,12 +66,6 @@ def register(username, email, password):
         print("Registrasi berhasil.")
 
 
-def is_valid_membership_id(membership_id):
-    # Mengecek apakah membership_id memenuhi semua ketentuan
-    pattern = re.compile(r"^(A|S)[A-Z0-9]{5}$")
-    return bool(pattern.match(membership_id))
-
-
 def clear():
     os.system("cls")
     time.sleep(1)
