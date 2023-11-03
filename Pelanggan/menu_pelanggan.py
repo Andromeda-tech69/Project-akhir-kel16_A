@@ -1,4 +1,4 @@
-import os, json, time
+import os, json, time, sys, re
 from prettytable import PrettyTable
 from colorama import Fore, Back, Style, init
 from datetime import datetime
@@ -152,16 +152,31 @@ def beli_barang(username,is_membership):
                         print("Maaf, stok barang telah habis.")
                 return
             else:
+                saldo = 0
+                for user in data_user['pelanggan']:
+                    if user['username'] == username:
+                        saldo = int(user.get('Saldo E-money', 0))
+                        break
                 print("Anda Bukan Member.")
+                print("Beli membership Rp. 150.000")
                 tanya = input("Apakah Anda Mau Jadi Member? : ya / tidak:").lower()
                 if tanya == 'ya' or tanya =='y':
-                    for user in data_user['pelanggan']:
-                        if user['username'] == username:
-                            user['membership_id'] = True
-                            time.sleep(1)
-                            print("Selamat Menjadi Member ",username)
-                    save_Login(data_user)
-                else:continue
+                    if saldo >= 150000:
+                        saldo_sebelum = saldo
+                        for user in data_user['pelanggan']:
+                            if user['username'] == username:
+                                user['membership_id'] = True
+                                user['Saldo E-money'] -= 150000
+                                saldo_setelah = user['Saldo E-money']
+                                time.sleep(1)
+                                print(f"Saldo Sebelum Pembelian Member: {saldo_sebelum}")
+                                print("Selamat Menjadi Member, ", username)
+                                print(f"Saldo Setelah Pembelian Member: {saldo_setelah}")
+                        save_Login(data_user)
+                    else:
+                        print("Saldo tidak mencukupi untuk menjadi member.")
+                else:
+                    continue
     
     if not dicari:print("Nomor Barang Tidak Ada")
             
@@ -196,8 +211,7 @@ def menu_pelanggan(user_role):
                 top_up(user_role['username'])
             elif pilihan == "4":
                 print("Terima kasih! Sampai jumpa.")
-                break
-
+                sys.exit()
             else:
                 print("Pilihan tidak valid. Silakan pilih kembali.")
         except KeyboardInterrupt:
