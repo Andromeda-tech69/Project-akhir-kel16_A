@@ -47,7 +47,8 @@ def search_user(username):
         for user in data["pelanggan"]:
             if user["username"] == username:
                 return user
-            else:print("User %s not found")
+    else:
+        print("User %s not found")
     return None
 
 
