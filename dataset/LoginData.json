@@ -20,32 +20,18 @@
             "Saldo E-money": 0
         },
         {
-            "username": "a",
-            "password": "a",
-            "email": "a",
+            "username": "b",
+            "email": "b",
+            "password": "b",
             "membership_id": false,
-            "Saldo E-money": 95000
+            "Saldo E-money": 0
         },
         {
             "username": "fafa",
             "email": "fafa@gmail.com",
             "password": "fafa",
             "membership_id": true,
-            "Saldo E-money": 99921999
-        },
-        {
-            "username": "test",
-            "email": "test",
-            "password": "test",
-            "membership_id": true,
-            "Saldo E-money": 15000
-        },
-        {
-            "username": "b",
-            "email": "b",
-            "password": "b",
-            "membership_id": false,
-            "Saldo E-money": 0
+            "Saldo E-money": 500000
         }
     ]
 }

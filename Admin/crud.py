@@ -81,6 +81,7 @@ def create_data(data):
                 break
         except ValueError:
             print("Masukan Dengan Benar (Harga dan Stok harus berupa angka bulat positif).")
+
 # Fungsi untuk mengubah data
 def update_data(data):
     read_data(data)
@@ -88,21 +89,45 @@ def update_data(data):
         try:
             nomor = int(input("Masukkan nomor paket yang ingin diubah: "))
             break
-        except:
-            print("Masukan Dengan Benar")
+        except ValueError:
+            print("Masukkan nomor yang valid.")
+
     for entry in data["Daftar_paket"]:
         if entry["Nomor"] == nomor:
             while True:
-                entry["Deskripsi"] = str(input("Masukkan Deskripsi baru: ")).lower()
-                entry["jenis"] = str(input("Masukkan jenis baru: ")).lower()
-                entry["membership"] = bool(input("Masukkan akses baru: "))
+                entry["Deskripsi"] = input("Masukkan Deskripsi baru: ").lower()
+                entry["jenis"] = input("Masukkan jenis baru: ").lower()
+
+                while True:
+                    akses_baru = input("Masukkan akses baru (True/False): ").strip().lower()
+                    if akses_baru in ["true", "false"]:
+                        entry["membership"] = akses_baru == "true"
+                        break
+                    else:
+                        print("Masukkan True atau False.")
+
                 while True:
                     try:
-                        entry["Harga"] = int(input("Masukkan harga baru: "))
-                        entry["stock"] = int(input("Masukkan stock baru: "))
-                        break
-                    except:
-                        print("Masukkan Dengan Benar")
+                        harga_baru = int(input("Masukkan harga baru: "))
+                        if 0 <= harga_baru <= 400000:
+                            entry["Harga"] = harga_baru
+                            break
+                        else:
+                            print("Harga harus antara 0 dan 400.000.")
+                    except ValueError:
+                        print("Masukkan harga dengan benar (angka).")
+
+                while True:
+                    try:
+                        stok_baru = int(input("Masukkan stok baru: "))
+                        if 0 <= stok_baru <= 1000:
+                            entry["stock"] = stok_baru
+                            break
+                        else:
+                            print("Stok harus antara 0 dan 1000.")
+                    except ValueError:
+                        print("Masukkan stok dengan benar (angka).")
+
                 save_data(data)
                 print("Data berhasil diubah.")
                 return
@@ -149,6 +174,7 @@ def menu():
             print(Fore.RED + "4. Hapus Data")
             print(Fore.MAGENTA + "5. Manage Akun")
             print(Fore.CYAN + "6. Keluar")
+            print(Fore.MAGENTA + "✨" * 20)
 
             pilihan = input(Fore.WHITE + "👉 Pilih menu: ")
 

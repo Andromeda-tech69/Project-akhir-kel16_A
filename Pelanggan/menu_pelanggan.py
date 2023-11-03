@@ -1,4 +1,4 @@
-import os, json, time
+import os, json, time, sys, re
 from prettytable import PrettyTable
 from colorama import Fore, Back, Style, init
 from datetime import datetime
@@ -196,10 +196,10 @@ def menu_pelanggan(user_role):
                 top_up(user_role['username'])
             elif pilihan == "4":
                 print("Terima kasih! Sampai jumpa.")
-                break
-
+                sys.exit()
             else:
                 print("Pilihan tidak valid. Silakan pilih kembali.")
+                break
         except KeyboardInterrupt:
             print("\n" + Fore.YELLOW + "⚠ KeyboardInterrupt")
             continue

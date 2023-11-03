@@ -16,6 +16,11 @@ init(autoreset=True)
 ROOT_DIR = os.path.abspath(os.curdir)
 
 
+def is_valid_email(email):
+    # Pola regex untuk memeriksa alamat email
+    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    return re.match(pattern, email) is not None
+
 # Fungsi untuk login
 def login(username_or_email, password):
     data = load_data()
@@ -83,46 +88,78 @@ def load_data():
 
 
 def main():
-    while True:
-        print(Fore.YELLOW + "=" * 30)
-        print(Fore.MAGENTA + "👑 1. Login Admin")
-        print(Fore.CYAN + "🛒 2. Login Pelanggan")
-        print(Fore.GREEN + "📋 3. Registrasi")
-        print(Fore.RED + "🚪 4. Exit")
-        print(Fore.YELLOW + "=" * 30)
+    try:
+        admin_login_attempts = 0
+        customer_login_attempts = 0
+        max_attempts = 3
 
-        masukkan = input(Fore.WHITE + "Masukkan input: ")
+        while True:
+            print(Fore.YELLOW + "=" * 30)
+            print(Fore.MAGENTA + "👑 1. Login Admin")
+            print(Fore.CYAN + "🛒 2. Login Pelanggan")
+            print(Fore.GREEN + "📋 3. Registrasi")
+            print(Fore.RED + "🚪 4. Exit")
+            print(Fore.YELLOW + "=" * 30)
 
-        pengguna = load_data()
-        if masukkan == "1":
-            while True:
-                username_or_email = input("Masukkan username atau email: ")
-                password = pwinput.pwinput(prompt="Masukkan password: ")
+            masukkan = input(Fore.WHITE + "Masukkan input: ").strip()
 
-                if (
-                    pengguna["admin"]["username"] == username_or_email
-                    or pengguna["admin"]["email"] == username_or_email
-                ) and pengguna["admin"]["password"] == password:
-                    print("Login sukses.")
-                    clear()
-                    import Admin.crud as admin
-                    admin.menu()
-                    break
-                else:
-                    clear()
-                    print("Login gagal. Silakan coba lagi.")
-
-        elif masukkan == "2":
             pengguna = load_data()
-            username_or_email = input("Masukkan username atau email: ")
-            password = pwinput.pwinput(prompt="Masukkan password: ")
-            login(username_or_email,password)
-        elif masukkan == "3":
-            while True:
-                username = input("Masukkan username: ")
-                email = input("Masukkan email: ")
-                password = pwinput.pwinput(prompt="Masukkan password: ")
-                register(username,email,password)
-        elif masukkan == "4":
-            print("Terima kasih, sampai jumpa kembali.")
-            raise SystemExit
+            if masukkan == "1":
+                while admin_login_attempts < max_attempts:
+                    username_or_email = input("Masukkan username atau email: ")
+                    password = pwinput.pwinput(prompt="Masukkan password: ")
+                    if (
+                        pengguna["admin"]["username"] == username_or_email
+                        or pengguna["admin"]["email"] == username_or_email
+                    ) and pengguna["admin"]["password"] == password:
+                        print("Login sukses.")
+                        admin_login_attempts = 0  # Reset login attempts
+                        clear()
+                        import Admin.crud as admin
+                        admin.menu()
+                        break
+                    else:
+                        admin_login_attempts += 1
+                        print(f"Login gagal. Sisa percobaan: {max_attempts - admin_login_attempts}")
+                        clear()
+                else:
+                    print("Batas maksimum percobaan login admin tercapai.")
+                    raise SystemExit
+
+            elif masukkan == "2":
+                while customer_login_attempts < max_attempts:
+                    username_or_email = input("Masukkan username atau email: ")
+                    password = pwinput.pwinput(prompt="Masukkan password: ")
+                    if login(username_or_email, password):
+                        customer_login_attempts = 0  # Reset login attempts
+                        break
+                    else:
+                        customer_login_attempts += 1
+                        print(f"Login gagal. Sisa percobaan: {max_attempts - customer_login_attempts}")
+                else:
+                    print("Batas maksimum percobaan login pelanggan tercapai.")
+                    raise SystemExit
+
+            elif masukkan == "3":
+                while True:
+                    username = input("Masukkan username: ")
+                    email = input("Masukkan email: ")
+                    password = pwinput.pwinput(prompt="Masukkan password: ")
+
+                    # Memeriksa apakah alamat email valid
+                    if not (username.strip() == "" or email.strip() == "" or password.strip() == ""):
+                        if is_valid_email(email):
+                            register(username, email, password)
+                            clear()
+                            break
+                        else:
+                            print("Alamat email tidak valid. Silakan coba lagi.")
+                    else: print("input tidak boleh kosong.")
+            elif masukkan =="4":
+                print(Fore.YELLOW + "#"*40)
+                print(Fore.CYAN + "Terima kasih, sampai jumpa kembali.")
+                print(Fore.YELLOW + "#"*40)
+                raise SystemExit
+    except Exception as e:
+        print("Terjadi kesalahan:", str(e))
+
