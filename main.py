@@ -41,8 +41,8 @@ if __name__ == "__main__":
     while True:
         try:
             login.main()
-        except Exception as e:
-            print("Ups Error!!: \nError Message: ", e)
+        # except Exception as e:
+        #     print("Ups Error!!: \nError Message: ", e)
         except KeyboardInterrupt:
             os.system("cls")
             print("\nKeyboard Interrupt")
