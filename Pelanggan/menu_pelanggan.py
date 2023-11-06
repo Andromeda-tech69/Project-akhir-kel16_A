@@ -211,7 +211,8 @@ def menu_pelanggan(user_role):
                 top_up(user_role['username'])
             elif pilihan == "4":
                 print("Terima kasih! Sampai jumpa.")
-                sys.exit()
+                import Login.login as login
+                login.main()
             else:
                 print("Pilihan tidak valid. Silakan pilih kembali.")
         except KeyboardInterrupt:

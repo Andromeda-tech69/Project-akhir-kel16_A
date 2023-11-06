@@ -20,6 +20,13 @@
             "Saldo E-money": 0
         },
         {
+            "username": "a",
+            "email": "a@mail.com",
+            "password": "a",
+            "membership_id": false,
+            "Saldo E-money": 0
+        },
+        {
             "username": "b",
             "email": "b",
             "password": "b",
@@ -32,6 +39,13 @@
             "password": "fafa",
             "membership_id": true,
             "Saldo E-money": 400000
+        },
+        {
+            "username": "a@gmail.com",
+            "email": "a@gmail.com",
+            "password": "\u00e0H",
+            "membership_id": false,
+            "Saldo E-money": 0
         }
     ]
 }

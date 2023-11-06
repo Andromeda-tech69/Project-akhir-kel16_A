@@ -32,7 +32,8 @@ def save_data(data):
         print("File Not Found")
 
 
-def read_data(data):
+def read_data():
+    data = load()
     Daftar_paket = data["Daftar_paket"]
 
     if not Daftar_paket:
@@ -84,7 +85,7 @@ def create_data(data):
 
 # Fungsi untuk mengubah data
 def update_data(data):
-    read_data(data)
+    read_data()
     while True:
         try:
             nomor = int(input("Masukkan nomor paket yang ingin diubah: "))
@@ -136,7 +137,7 @@ def update_data(data):
 
 # Fungsi untuk menghapus data
 def delete_data(data):
-    read_data(data)
+    read_data()
     while True:
         try:
             nomor = int(input("Masukkan nomor paket yang ingin dihapus: "))

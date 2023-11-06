@@ -1,52 +1,84 @@
 {
-    "Daftar_paket": [
-        {
-            "Nomor": 1,
-            "Deskripsi": "Paket 250GB Spesial Member",
-            "jenis": "Paket Bulanan",
-            "membership": true,
-            "Harga": 250000,
-            "stock": 99
-        },
-        {
-            "Nomor": 2,
-            "Deskripsi": "Paket Spesial 60GB Member",
-            "jenis": "Paket Bulanan",
-            "membership": true,
-            "Harga": 75000,
-            "stock": 99
-        },
-        {
-            "Nomor": 3,
-            "Deskripsi": "Paket Spesial 50GB Reguler",
-            "jenis": "Paket Bulanan",
-            "membership": false,
-            "Harga": 100000,
-            "stock": 100
-        },
-        {
-            "Nomor": 4,
-            "Deskripsi": "Paket Hemat 13GB reguler",
-            "jenis": "Paket Bulanan",
-            "membership": false,
-            "Harga": 25000,
-            "stock": 999
-        },
-        {
-            "Nomor": 5,
-            "Deskripsi": "Paket 25GB reguler",
-            "jenis": "Paket Mingguan",
-            "membership": false,
-            "Harga": 45000,
-            "stock": 1000
-        },
-        {
-            "Nomor": 6,
-            "Deskripsi": "Paket waw 40GB member",
-            "jenis": "Paket bulanan",
-            "membership": true,
-            "Harga": 160000,
-            "stock": 255
-        }
-    ]
+  "Daftar_paket": [
+    {
+      "Nomor": 1,
+      "Deskripsi": "Paket 250GB Spesial Member",
+      "jenis": "Paket Bulanan",
+      "membership": true,
+      "Harga": 250000,
+      "stock": 99
+    },
+    {
+      "Nomor": 2,
+      "Deskripsi": "Paket Spesial 50GB Reguler",
+      "jenis": "Paket Bulanan",
+      "membership": true,
+      "Harga": 100000,
+      "stock": 100
+    },
+    {
+      "Nomor": 3,
+      "Deskripsi": "Paket Hemat 13GB reguler",
+      "jenis": "Paket Bulanan",
+      "membership": true,
+      "Harga": 25000,
+      "stock": 999
+    },
+    {
+      "Nomor": 4,
+      "Deskripsi": "Paket 25GB reguler",
+      "jenis": "Paket Mingguan",
+      "membership": true,
+      "Harga": 45000,
+      "stock": 998
+    },
+    {
+      "Nomor": 5,
+      "Deskripsi": "Paket waw 40GB member",
+      "jenis": "Paket bulanan",
+      "membership": true,
+      "Harga": 160000,
+      "stock": 255
+    },
+    {
+      "Nomor": 6,
+      "Deskripsi": "5",
+      "jenis": "5",
+      "membership": true,
+      "Harga": 5,
+      "stock": 5
+    },
+    {
+      "Nomor": 7,
+      "Deskripsi": "1",
+      "jenis": "1",
+      "membership": false,
+      "Harga": 1,
+      "stock": 1
+    },
+    {
+      "Nomor": 8,
+      "Deskripsi": "1",
+      "jenis": "1",
+      "membership": true,
+      "Harga": 1,
+      "stock": 1
+    },
+    {
+      "Nomor": 9,
+      "Deskripsi": "9",
+      "jenis": "9",
+      "membership": true,
+      "Harga": 9,
+      "stock": 9
+    },
+    {
+      "Nomor": 10,
+      "Deskripsi": "1",
+      "jenis": "1",
+      "membership": true,
+      "Harga": 1,
+      "stock": 1
+    }
+  ]
 }
