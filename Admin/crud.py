@@ -61,18 +61,48 @@ def create_data(data):
     while True:
         try:
             data_baru = {
-                "Nomor":len(data["Daftar_paket"]) + 1,
-                "Deskripsi": str(input("Masukkan Deskripsi: ")),
-                "jenis": str(input("Masukkan jenis: ")),
-                "membership": bool(input("Masukkan Membership: ")),
+                "Nomor": len(data["Daftar_paket"]) + 1,
+                "Deskripsi": "",
+                "jenis": "",
+                "membership": False,
                 "Harga": 0,
                 "stock": 0,
             }
-            harga = int(input("Masukkan harga: "))
-            stock = int(input("Masukkan jumblah stok: "))
+            while True:
+                deskripsi = input("Masukkan Deskripsi (maksimal 30 karakter): ")
+                if not deskripsi:
+                    print("Deskripsi tidak boleh kosong. Silakan coba lagi.")
+                elif len(deskripsi) > 30:
+                    print("Deskripsi tidak boleh lebih dari 30 karakter. Silakan coba lagi.")
+                else:
+                    print("Input salah, coba lagi.")
+                    break
 
-            if harga < 0 or stock < 0:
-                print("Harga dan stok tidak boleh negatif. Silakan coba lagi.")
+            while True:
+                jenis = input("Masukkan jenis (maksimal 30 karakter): ")
+                if not jenis:
+                    print("Jenis tidak boleh kosong. Silakan coba lagi.")
+                elif len(jenis) > 30:
+                    print("Jenis tidak boleh lebih dari 30 karakter. Silakan coba lagi.")
+                else:
+                    print("Input salah, coba lagi.")
+
+            while True:
+                membership = input("Masukkan Membership (True/False): ").strip().lower()
+                if membership == "true":
+                    data_baru["membership"] = True
+                    break
+                elif membership == "false":
+                    data_baru["membership"] = False
+                    break
+                else:
+                    print("Input hanya boleh True atau False. Silakan coba lagi.")
+
+            harga = int(input("Masukkan harga (maksimal 400000): "))
+            stock = int(input("Masukkan jumlah stok (maksimal 1000): "))
+
+            if harga < 0 or harga > 400000 or stock < 0 or stock > 1000:
+                print("Harga dan stok tidak boleh negatif, dan harga maksimal adalah 400000, stok maksimal adalah 1000. Silakan coba lagi.")
             else:
                 data_baru["Harga"] = harga
                 data_baru["stock"] = stock
@@ -81,7 +111,7 @@ def create_data(data):
                 print("Data berhasil ditambahkan.")
                 break
         except ValueError:
-            print("Masukan Dengan Benar (Harga dan Stok harus berupa angka bulat positif).")
+            print("Masukkan dengan benar (Harga dan Stok harus berupa angka bulat positif).")
 
 # Fungsi untuk mengubah data
 def update_data(data):
@@ -96,8 +126,20 @@ def update_data(data):
     for entry in data["Daftar_paket"]:
         if entry["Nomor"] == nomor:
             while True:
-                entry["Deskripsi"] = input("Masukkan Deskripsi baru: ").lower()
-                entry["jenis"] = input("Masukkan jenis baru: ").lower()
+                deskripsi = input("Masukkan Deskripsi baru: ").lower()
+                jenis = input("Masukkan jenis baru: ").lower()
+                if not deskripsi:
+                    print("Deskripsi tidak boleh kosong.")
+                elif len(deskripsi) > 30:
+                    print("Deskripsi tidak boleh lebih dari 30 karakter.")
+                elif not jenis:
+                    print("Jenis tidak boleh kosong.")
+                elif len(jenis) > 30:
+                    print("Jenis tidak boleh lebih dari 30 karakter.")
+                else:
+                    entry["Deskripsi"] = deskripsi
+                    entry["jenis"] = jenis
+                    break
 
                 while True:
                     akses_baru = input("Masukkan akses baru (True/False): ").strip().lower()

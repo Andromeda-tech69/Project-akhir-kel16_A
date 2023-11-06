@@ -4,6 +4,7 @@
       "Nomor": 1,
       "Deskripsi": "Paket 250GB Spesial Member",
       "jenis": "Paket Bulanan",
+<<<<<<< HEAD
       "membership": true,
       "Harga": 250000,
       "stock": 99
@@ -13,18 +14,45 @@
       "Deskripsi": "Paket Spesial 50GB Reguler",
       "jenis": "Paket Bulanan",
       "membership": true,
+=======
+      "membership": "Member",
+      "Harga": 250000,
+      "stock": 100
+    },
+    {
+      "Nomor": 2,
+      "Deskripsi": "Paket Spesial 60GB Member",
+      "jenis": "Paket Bulanan",
+      "membership": "Member",
+      "Harga": 75000,
+      "stock": 99
+    },
+    {
+      "Nomor": 3,
+      "Deskripsi": "Paket Spesial 50GB Reguler",
+      "jenis": "Paket Bulanan",
+      "membership": "Member",
+>>>>>>> 0550a476cd8c9003dfbef035c64a7b65e1c12202
       "Harga": 100000,
       "stock": 100
     },
     {
+<<<<<<< HEAD
       "Nomor": 3,
       "Deskripsi": "Paket Hemat 13GB reguler",
       "jenis": "Paket Bulanan",
       "membership": true,
+=======
+      "Nomor": 4,
+      "Deskripsi": "Paket Hemat 13GB reguler",
+      "jenis": "Paket Bulanan",
+      "membership": "Member",
+>>>>>>> 0550a476cd8c9003dfbef035c64a7b65e1c12202
       "Harga": 25000,
       "stock": 999
     },
     {
+<<<<<<< HEAD
       "Nomor": 4,
       "Deskripsi": "Paket 25GB reguler",
       "jenis": "Paket Mingguan",
@@ -37,10 +65,25 @@
       "Deskripsi": "Paket waw 40GB member",
       "jenis": "Paket bulanan",
       "membership": true,
+=======
+      "Nomor": 5,
+      "Deskripsi": "Paket 25GB reguler",
+      "jenis": "Paket Mingguan",
+      "membership": "Member",
+      "Harga": 45000,
+      "stock": 1000
+    },
+    {
+      "Nomor": 6,
+      "Deskripsi": "Paket waw 40GB member",
+      "jenis": "Paket bulanan",
+      "membership": "Member",
+>>>>>>> 0550a476cd8c9003dfbef035c64a7b65e1c12202
       "Harga": 160000,
       "stock": 255
     },
     {
+<<<<<<< HEAD
       "Nomor": 6,
       "Deskripsi": "5",
       "jenis": "5",
@@ -79,6 +122,14 @@
       "membership": true,
       "Harga": 1,
       "stock": 1
+=======
+      "Nomor": 7,
+      "Deskripsi": "Paket yahuu 12GB",
+      "jenis": "Paket Harian",
+      "membership": true,
+      "Harga": 34000,
+      "stock": 25
+>>>>>>> 0550a476cd8c9003dfbef035c64a7b65e1c12202
     }
   ]
 }
